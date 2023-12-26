@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.22)
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+# comment out to make cmake output less verbose
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # for cross-compiling toolchains
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
+# set compiler path and executable extension
 set(CMAKE_ASM_COMPILER "/usr/bin/arm-none-eabi-gcc")
 set(CMAKE_C_COMPILER   "/usr/bin/arm-none-eabi-gcc")
-
 set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
-set(CMAKE_EXECUTABLE_SUFFIX_C .elf)
+set(CMAKE_EXECUTABLE_SUFFIX_C   .elf)
 
 project(
     test
@@ -34,12 +35,12 @@ add_compile_options(
 )
 
 add_link_options(
-     -mcpu=cortex-m4
+    -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
     -mfloat-abi=hard
     -Wl,--gc-sections
-    -T "${CMAKE_SOURCE_DIR}/STM32L476RGTX_FLASH.ld"
+    -T "${CMAKE_SOURCE_DIR}/stm32l476xx.ld"
 )
 
 file(
