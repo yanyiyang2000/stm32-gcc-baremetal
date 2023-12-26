@@ -1,0 +1,61 @@
+cmake_minimum_required(VERSION 3.22)
+
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+# for cross-compiling toolchains
+set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
+set(CMAKE_ASM_COMPILER "/usr/bin/arm-none-eabi-gcc")
+set(CMAKE_C_COMPILER   "/usr/bin/arm-none-eabi-gcc")
+
+set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
+set(CMAKE_EXECUTABLE_SUFFIX_C .elf)
+
+project(
+    test
+    LANGUAGES C ASM
+)
+
+add_compile_definitions(
+    STM32L476xx
+)
+
+add_compile_options(
+    -mcpu=cortex-m4
+    -mfpu=fpv4-sp-d16
+    -mthumb
+    -mfloat-abi=hard
+    -O0
+    -g3
+    -Wall
+    -Wno-implicit-function-declaration
+    -ffunction-sections
+    -fdata-sections
+)
+
+add_link_options(
+     -mcpu=cortex-m4
+    -mfpu=fpv4-sp-d16
+    -mthumb
+    -mfloat-abi=hard
+    -Wl,--gc-sections
+    -T "${CMAKE_SOURCE_DIR}/STM32L476RGTX_FLASH.ld"
+)
+
+file(
+    GLOB SRC
+    User/source/*.c
+    CMSIS/Device/ST/STM32L4xx/Source/Templates/system_stm32l4xx.c
+    CMSIS/Device/ST/STM32L4xx/Source/Templates/gcc/startup_stm32l476xx.s
+)
+
+include_directories(
+    ${PROJECT_NAME}
+    PUBLIC
+    User/include
+    CMSIS/Device/ST/STM32L4xx/Include
+    CMSIS/Core/Include/m-profile
+    CMSIS/Core/Include
+)
+
+add_executable(${PROJECT_NAME} ${SRC})
