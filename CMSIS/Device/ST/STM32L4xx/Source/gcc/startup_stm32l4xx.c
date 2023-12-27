@@ -73,24 +73,24 @@ __NO_RETURN void SysTick_Handler        (void) __attribute__ ((weak, alias("Defa
 #pragma GCC diagnostic ignored "-Wpedantic"
 #endif
 
-extern const uint32_t  __VECTOR_TABLE[];
-       const uint32_t  __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE = {
-  (uint32_t)(&__INITIAL_SP),          /*     Initial Stack Pointer */
-  (uint32_t)Reset_Handler,            /*     Reset Handler */
-  (uint32_t)NMI_Handler,              /* -14 NMI Handler */
-  (uint32_t)HardFault_Handler,        /* -13 Hard Fault Handler */
-  (uint32_t)MemManage_Handler,        /* -12 MPU Fault Handler */
-  (uint32_t)BusFault_Handler,         /* -11 Bus Fault Handler */
-  (uint32_t)UsageFault_Handler,       /* -10 Usage Fault Handler */
-  (uint32_t)SecureFault_Handler,      /*  -9 Secure Fault Handler */
-  0,                                  /*     Reserved */
-  0,                                  /*     Reserved */
-  0,                                  /*     Reserved */
-  (uint32_t)SVC_Handler,              /*  -5 SVCall Handler */
-  (uint32_t)DebugMon_Handler,         /*  -4 Debug Monitor Handler */
-  0,                                  /*     Reserved */
-  (uint32_t)PendSV_Handler,           /*  -2 PendSV Handler */
-  (uint32_t)SysTick_Handler,          /*  -1 SysTick Handler */
+extern const void *  __VECTOR_TABLE[];
+       const void *  __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE = {
+  (&__INITIAL_SP),          /*     Initial Stack Pointer */
+  Reset_Handler,            /*     Reset Handler */
+  NMI_Handler,              /* -14 NMI Handler */
+  HardFault_Handler,        /* -13 Hard Fault Handler */
+  MemManage_Handler,        /* -12 MPU Fault Handler */
+  BusFault_Handler,         /* -11 Bus Fault Handler */
+  UsageFault_Handler,       /* -10 Usage Fault Handler */
+  SecureFault_Handler,      /*  -9 Secure Fault Handler */
+  0,                        /*     Reserved */
+  0,                        /*     Reserved */
+  0,                        /*     Reserved */
+  SVC_Handler,              /*  -5 SVCall Handler */
+  DebugMon_Handler,         /*  -4 Debug Monitor Handler */
+  0,                        /*     Reserved */
+  PendSV_Handler,           /*  -2 PendSV Handler */
+  SysTick_Handler,          /*  -1 SysTick Handler */
 
 /* TODO: Add your device specific interrupt vectors */
   /* Interrupts */

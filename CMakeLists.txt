@@ -41,7 +41,7 @@ add_link_options(
     -mfloat-abi=hard
     -Wl,--gc-sections
     --specs=nosys.specs
-    -T "${CMAKE_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l476xx_gcc.ld"
+    -T "${CMAKE_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
 
 file(
