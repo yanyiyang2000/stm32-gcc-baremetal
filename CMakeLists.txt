@@ -29,7 +29,7 @@ add_compile_options(
     -O0
     -g3
     -Wall
-    -Wno-implicit-function-declaration
+    # -Wno-implicit-function-declaration
     -ffunction-sections
     -fdata-sections
 )
@@ -40,6 +40,7 @@ add_link_options(
     -mthumb
     -mfloat-abi=hard
     -Wl,--gc-sections
+    --specs=nosys.specs
     -T "${CMAKE_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l476xx_gcc.ld"
 )
 
@@ -47,7 +48,7 @@ file(
     GLOB SRC
     User/source/*.c
     CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
-    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_Device.c
+    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
 )
 
 include_directories(
