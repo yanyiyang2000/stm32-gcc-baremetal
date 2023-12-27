@@ -45,7 +45,7 @@
 /*---------------------------------------------------------------------------
   Exception / Interrupt Vector table
  *---------------------------------------------------------------------------*/
-extern const VECTOR_TABLE_Type __VECTOR_TABLE[496];
+extern const void * __VECTOR_TABLE[496];
 
 
 /*---------------------------------------------------------------------------
@@ -65,7 +65,7 @@ void SystemCoreClockUpdate (void)
 /* TODO: Add code to calculate the system frequency based upon the current
          register settings.
          This function can be used to retrieve the system core clock frequeny
-         after user changed register sittings. */
+         after user changed register settings. */
   SystemCoreClock = SYSTEM_CLOCK;
 }
 

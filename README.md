@@ -42,6 +42,11 @@ rm -rf *
 ```
 
 ## Tools
+Use the following command to shows all the predefined macros
+```bash
+arm-none-eabi-gcc -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -mfloat-abi=hard -E -dM -< /dev/null | sort
+```
+
 In the `build` directory, use the following command to view the dieassembly code:
 ```bash
 arm-none-eabi-objdump -d -s <PROJECT_NAME>.elf
