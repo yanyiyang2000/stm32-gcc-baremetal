@@ -23,10 +23,8 @@
  * limitations under the License.
  */
 
-/* ToDo: rename this file from 'startup_Device.c' to 'startup_<Device>.c according to your device naming */
-
-
-#include "<Device>.h"
+#include "cmsis_gcc_m.h"
+#include "stm32l4xx.h"
 
 /*---------------------------------------------------------------------------
   External References
@@ -62,9 +60,9 @@ void PendSV_Handler         (void) __attribute__ ((weak, alias("Default_Handler"
 void SysTick_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
 
 /* ToDo: Add your device specific interrupt handler */
-void <DeviceInterrupt first>_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-...
-void <DeviceInterrupt last>_Handler      (void) __attribute__ ((weak, alias("Default_Handler")));
+// void <DeviceInterrupt first>_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
+// ...
+// void <DeviceInterrupt last>_Handler      (void) __attribute__ ((weak, alias("Default_Handler")));
 
 
 /*----------------------------------------------------------------------------
@@ -77,9 +75,9 @@ void <DeviceInterrupt last>_Handler      (void) __attribute__ ((weak, alias("Def
 #endif
 
 /* ToDo: Add Cortex exception vectors according the used Cortex-Core */
-extern const VECTOR_TABLE_Type __VECTOR_TABLE[<Device vector table entries>];
-       const VECTOR_TABLE_Type __VECTOR_TABLE[<Device vector table entries>] __VECTOR_TABLE_ATTRIBUTE = {
-  (VECTOR_TABLE_Type)(&__INITIAL_SP),  /*     Initial Stack Pointer */
+extern const uint32_t  __VECTOR_TABLE[];
+       const uint32_t  __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE = {
+  (uint32_t)(&__INITIAL_SP),           /*     Initial Stack Pointer */
   Reset_Handler,                       /*     Reset Handler */
   NMI_Handler,                         /* -14 NMI Handler */
   HardFault_Handler,                   /* -13 Hard Fault Handler */
@@ -98,9 +96,9 @@ extern const VECTOR_TABLE_Type __VECTOR_TABLE[<Device vector table entries>];
 
 /* ToDo: Add your device specific interrupt vectors */
   /* Interrupts */
-  <DeviceInterrupt first>_Handler,     /* first Device Interrupt */
-  ...
-  <DeviceInterrupt last>_Handler       /* last Device Interrupt */
+  // <DeviceInterrupt first>_Handler,     /* first Device Interrupt */
+  // ...
+  // <DeviceInterrupt last>_Handler       /* last Device Interrupt */
 };
 
 #if defined ( __GNUC__ )
@@ -114,11 +112,6 @@ __NO_RETURN void Reset_Handler(void)
 {
   __set_PSP((uint32_t)(&__INITIAL_SP));
 
-/* ToDo: Initialize stack limit register for Armv8-M Main Extension based processors*/
-  __set_MSPLIM((uint32_t)(&__STACK_LIMIT));
-  __set_PSPLIM((uint32_t)(&__STACK_LIMIT));
-
-/* ToDo: Add stack sealing for Armv8-M based processors */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
   __TZ_set_STACKSEAL_S((uint32_t *)(&__STACK_SEAL));
 #endif

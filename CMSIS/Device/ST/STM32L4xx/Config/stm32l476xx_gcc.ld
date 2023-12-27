@@ -32,8 +32,8 @@
     <o1> Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__ROM_BASE = 0x00000000;
-__ROM_SIZE = 0x00040000;
+__ROM_BASE = 0x08000000;
+__ROM_SIZE = 1024K;
 
 /*--------------------- Embedded RAM Configuration ----------------------------
   <h> RAM Configuration
@@ -42,7 +42,7 @@ __ROM_SIZE = 0x00040000;
   </h>
  -----------------------------------------------------------------------------*/
 __RAM_BASE = 0x20000000;
-__RAM_SIZE = 0x00020000;
+__RAM_SIZE = 96K;
 
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
@@ -50,18 +50,12 @@ __RAM_SIZE = 0x00020000;
     <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__STACK_SIZE = 0x00000400;
-__HEAP_SIZE  = 0x00000C00;
+__STACK_SIZE = 0x00000200;
+__HEAP_SIZE  = 0x00000400;
 
 /*
  *-------------------- <<< end of configuration section >>> -------------------
  */
-
-/* ARMv8-M stack sealing:
-   to use ARMv8-M stack sealing set __STACKSEAL_SIZE to 8 otherwise keep 0
- */
-__STACKSEAL_SIZE = 0;
-
 
 MEMORY
 {
@@ -98,8 +92,8 @@ MEMORY
  *   __StackLimit
  *   __StackTop
  *   __stack
- *   __StackSeal      (only if ARMv8-M stack sealing is used)
  */
+
 ENTRY(Reset_Handler)
 
 SECTIONS
@@ -131,18 +125,6 @@ SECTIONS
     KEEP(*(.eh_frame*))
   } > FLASH
 
-  /*
-   * SG veneers:
-   * All SG veneers are placed in the special output section .gnu.sgstubs. Its start address
-   * must be set, either with the command line option '--section-start' or in a linker script,
-   * to indicate where to place these veneers in memory.
-   */
-/*
-  .gnu.sgstubs :
-  {
-    . = ALIGN(32);
-  } > FLASH
-*/
   .ARM.extab :
   {
     *(.ARM.extab* .gnu.linkonce.armextab.*)
@@ -164,12 +146,6 @@ SECTIONS
     LONG (ADDR(.data))
     LONG (SIZEOF(.data) / 4)
 
-    /* Add each additional data section here */
-/*
-    LONG (LOADADDR(.data2))
-    LONG (ADDR(.data2))
-    LONG (SIZEOF(.data2) / 4)
-*/
     __copy_table_end__ = .;
   } > FLASH
 
@@ -183,11 +159,6 @@ SECTIONS
     LONG (SIZEOF(.bss) / 4)
 */
 
-    /* Add each additional bss section here */
-/*
-    LONG (ADDR(.bss2))
-    LONG (SIZEOF(.bss2) / 4)
-*/
     __zero_table_end__ = .;
   } > FLASH
 
@@ -231,26 +202,6 @@ SECTIONS
 
   } > RAM AT > FLASH
 
-  /*
-   * Secondary data section, optional
-   *
-   * Remember to add each additional data section
-   * to the .copy.table above to assure proper
-   * initialization during startup.
-   */
-/*
-  .data2 : ALIGN(4)
-  {
-    . = ALIGN(4);
-    __data2_start__ = .;
-    *(.data2)
-    *(.data2.*)
-    . = ALIGN(4);
-    __data2_end__ = .;
-
-  } > RAM2 AT > FLASH
-*/
-
   .bss :
   {
     . = ALIGN(4);
@@ -262,25 +213,6 @@ SECTIONS
     __bss_end__ = .;
   } > RAM AT > RAM
 
-  /*
-   * Secondary bss section, optional
-   *
-   * Remember to add each additional bss section
-   * to the .zero.table above to assure proper
-   * initialization during startup.
-   */
-/*
-  .bss2 :
-  {
-    . = ALIGN(4);
-    __bss2_start__ = .;
-    *(.bss2)
-    *(.bss2.*)
-    . = ALIGN(4);
-    __bss2_end__ = .;
-  } > RAM2 AT > RAM2
-*/
-
   .heap (NOLOAD) :
   {
     . = ALIGN(8);
@@ -291,7 +223,7 @@ SECTIONS
     __HeapLimit = .;
   } > RAM
 
-  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE - __STACKSEAL_SIZE) (NOLOAD) :
+  .stack (ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE) (NOLOAD) :
   {
     . = ALIGN(8);
     __StackLimit = .;
@@ -300,19 +232,6 @@ SECTIONS
     __StackTop = .;
   } > RAM
   PROVIDE(__stack = __StackTop);
-
-  /* ARMv8-M stack sealing:
-     to use ARMv8-M stack sealing uncomment '.stackseal' section
-   */
-/*
-  .stackseal (ORIGIN(RAM) + LENGTH(RAM) - __STACKSEAL_SIZE) (NOLOAD) :
-  {
-    . = ALIGN(8);
-    __StackSeal = .;
-    . = . + 8;
-    . = ALIGN(8);
-  } > RAM
-*/
 
   /* Check if data + heap + stack exceeds RAM limit */
   ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")

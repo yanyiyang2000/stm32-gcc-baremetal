@@ -40,14 +40,14 @@ add_link_options(
     -mthumb
     -mfloat-abi=hard
     -Wl,--gc-sections
-    -T "${CMAKE_SOURCE_DIR}/STM32L476xx.ld"
+    -T "${CMAKE_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l476xx_gcc.ld"
 )
 
 file(
     GLOB SRC
     User/source/*.c
     CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
-    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l476xx.s
+    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_Device.c
 )
 
 include_directories(
