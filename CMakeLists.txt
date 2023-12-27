@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 
-# comment out to make cmake output less verbose
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+# uncomment to make cmake output verbose
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# for cross-compiling toolchains
+# skip compiler test for cross compilation
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 # set compiler path and executable extension
@@ -40,19 +40,17 @@ add_link_options(
     -mthumb
     -mfloat-abi=hard
     -Wl,--gc-sections
-    -T "${CMAKE_SOURCE_DIR}/stm32l476xx.ld"
+    -T "${CMAKE_SOURCE_DIR}/STM32L476xx.ld"
 )
 
 file(
     GLOB SRC
     User/source/*.c
-    CMSIS/Device/ST/STM32L4xx/Source/Templates/system_stm32l4xx.c
-    CMSIS/Device/ST/STM32L4xx/Source/Templates/gcc/startup_stm32l476xx.s
+    CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
+    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l476xx.s
 )
 
 include_directories(
-    ${PROJECT_NAME}
-    PUBLIC
     User/include
     CMSIS/Device/ST/STM32L4xx/Include
     CMSIS/Core/Include/m-profile
