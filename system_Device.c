@@ -1,7 +1,7 @@
-/*************************************************************************//**
- * @file     system_<Device>.c
+/******************************************************************************
+ * @file     system_stm32l4xx.c
  * @brief    CMSIS-Core(M) Device Peripheral Access Layer Source File for
- *           Device <Device>
+ *           Device stm32l4xx
  * @version  V1.0.0
  * @date     20. January 2021
  *****************************************************************************/

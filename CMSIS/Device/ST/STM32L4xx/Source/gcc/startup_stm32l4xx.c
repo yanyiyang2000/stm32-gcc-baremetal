@@ -23,7 +23,6 @@
  * limitations under the License.
  */
 
-#include "cmsis_gcc_m.h"
 #include "stm32l4xx.h"
 
 /*---------------------------------------------------------------------------
