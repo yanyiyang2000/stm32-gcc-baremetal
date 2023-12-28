@@ -41,21 +41,21 @@ add_link_options(
     -mfloat-abi=hard
     -Wl,--gc-sections
     --specs=nosys.specs
-    -T "${CMAKE_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
+    -T "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
 
 file(
     GLOB SRC
-    User/source/*.c
-    CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
-    CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
+    ${CMAKE_CURRENT_LIST_DIR}/User/source/*.c
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
 )
 
 include_directories(
-    User/include
-    CMSIS/Device/ST/STM32L4xx/Include
-    CMSIS/Core/Include/m-profile
-    CMSIS/Core/Include
+    ${CMAKE_CURRENT_LIST_DIR}/User/include
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Include
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include/m-profile
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include
 )
 
 add_executable(${PROJECT_NAME} ${SRC})

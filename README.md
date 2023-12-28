@@ -25,8 +25,8 @@ project(
 ## Building
 In the project root directory, use the following commands one by one:
 ```bash
-cmake -B build
-cmake --build build
+cmake -B build .
+cmake --build ./build
 ```
 
 ## Flashing
