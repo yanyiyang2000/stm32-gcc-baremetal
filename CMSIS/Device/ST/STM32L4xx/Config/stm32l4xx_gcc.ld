@@ -154,19 +154,11 @@ SECTIONS
     . = ALIGN(4);
     __zero_table_start__ = .;
 
-/*  .bss initialization to zero is already done during C Run-Time Startup.
     LONG (ADDR(.bss))
     LONG (SIZEOF(.bss) / 4)
-*/
 
     __zero_table_end__ = .;
   } > FLASH
-
-  /*
-   * This __etext variable is kept for backward compatibility with older,
-   * ASM based startup files.
-   */
-  PROVIDE(__etext = LOADADDR(.data));
 
   .data : ALIGN(4)
   {
