@@ -261,7 +261,7 @@ void SystemCoreClockUpdate(void)
   { /* MSIRANGE from RCC_CR applies */
     msirange = (RCC->CR & RCC_CR_MSIRANGE) >> 4U;
   }
-  /*MSI frequency range in HZ*/
+  /* MSI frequency range in HZ */
   msirange = MSIRangeTable[msirange];
 
   /* Get SYSCLK source -------------------------------------------------------*/
