@@ -25,11 +25,9 @@ add_compile_options(
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
-    -mfloat-abi=hard
     -O0
     -g3
     -Wall
-    # -Wno-implicit-function-declaration
     -ffunction-sections
     -fdata-sections
 )
@@ -38,7 +36,6 @@ add_link_options(
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
-    -mfloat-abi=hard
     -Wl,--gc-sections
     --specs=nosys.specs
     -T "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
