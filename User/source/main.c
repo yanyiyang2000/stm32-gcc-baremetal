@@ -2,9 +2,10 @@
 
 #include "stm32l476xx.h"
 
+#include "interrupt.h"
 #include "clock_config.h"
 #include "gpio_config.h"
-#include "interrupt.h"
+#include "uart_config.h"
 
 
 int main() {
@@ -23,4 +24,9 @@ int main() {
 	/* Configure GPIO PA2 and PA3 as UART receiver and transmitter */
 	GPIO_PA2_config();
 	GPIO_PA3_config();
+
+	/* Configure UART2 transmitter and receiver */
+	UART2_config();
+
+	while (1) {}
 }

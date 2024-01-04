@@ -28,6 +28,7 @@ add_compile_options(
     -O0
     -g3
     -Wall
+    -Wno-missing-attributes
     -ffunction-sections
     -fdata-sections
 )
