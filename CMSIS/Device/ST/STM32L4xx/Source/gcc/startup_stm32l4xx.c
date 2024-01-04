@@ -45,16 +45,16 @@ __NO_RETURN void Default_Handler(void);
   Exception / Interrupt Handler,
  *---------------------------------------------------------------------------*/
 /* Exceptions */
-void NMI_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
-void HardFault_Handler      (void) __attribute__ ((weak));
-void MemManage_Handler      (void) __attribute__ ((weak, alias("Default_Handler")));
-void BusFault_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-void UsageFault_Handler     (void) __attribute__ ((weak, alias("Default_Handler")));
-void SecureFault_Handler    (void) __attribute__ ((weak, alias("Default_Handler")));
-void SVC_Handler            (void) __attribute__ ((weak, alias("Default_Handler")));
-void DebugMon_Handler       (void) __attribute__ ((weak, alias("Default_Handler")));
-void PendSV_Handler         (void) __attribute__ ((weak, alias("Default_Handler")));
-void SysTick_Handler        (void) __attribute__ ((weak, alias("Default_Handler")));
+void NMI_Handler            		(void) __attribute__ ((weak, alias("Default_Handler")));
+void HardFault_Handler      		(void) __attribute__ ((weak));
+void MemManage_Handler      		(void) __attribute__ ((weak, alias("Default_Handler")));
+void BusFault_Handler       		(void) __attribute__ ((weak, alias("Default_Handler")));
+void UsageFault_Handler     		(void) __attribute__ ((weak, alias("Default_Handler")));
+void SecureFault_Handler    		(void) __attribute__ ((weak, alias("Default_Handler")));
+void SVC_Handler            		(void) __attribute__ ((weak, alias("Default_Handler")));
+void DebugMon_Handler       		(void) __attribute__ ((weak, alias("Default_Handler")));
+void PendSV_Handler         		(void) __attribute__ ((weak, alias("Default_Handler")));
+void SysTick_Handler        		(void) __attribute__ ((weak, alias("Default_Handler")));
 
 /* Interrupts */
 void WWDG_IRQHandler                (void) __attribute__ ((weak, alias("Default_Handler")));
@@ -148,27 +148,28 @@ void FPU_IRQHandler                 (void) __attribute__ ((weak, alias("Default_
 #pragma GCC diagnostic ignored "-Wpedantic"
 #endif
 
-extern const void *  __VECTOR_TABLE[];
-       const void *  __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE = {
-  (&__INITIAL_SP),          /*     Initial Stack Pointer */
-  Reset_Handler,            /*     Reset Handler */
-  NMI_Handler,              /* -14 NMI Handler */
-  HardFault_Handler,        /* -13 Hard Fault Handler */
-  MemManage_Handler,        /* -12 MPU Fault Handler */
-  BusFault_Handler,         /* -11 Bus Fault Handler */
-  UsageFault_Handler,       /* -10 Usage Fault Handler */
-  SecureFault_Handler,      /*  -9 Secure Fault Handler */
-  0,                        /*     Reserved */
-  0,                        /*     Reserved */
-  0,                        /*     Reserved */
-  SVC_Handler,              /*  -5 SVCall Handler */
-  DebugMon_Handler,         /*  -4 Debug Monitor Handler */
-  0,                        /*     Reserved */
-  PendSV_Handler,           /*  -2 PendSV Handler */
-  SysTick_Handler,          /*  -1 SysTick Handler */
+extern const void * __VECTOR_TABLE[];
 
-  /* Interrupts */
-  WWDG_IRQHandler,
+const void * __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE = {
+	(&__INITIAL_SP),          /*     Initial Stack Pointer */
+	Reset_Handler,            /*     Reset Handler */
+	NMI_Handler,              /* -14 NMI Handler */
+	HardFault_Handler,        /* -13 Hard Fault Handler */
+	MemManage_Handler,        /* -12 MPU Fault Handler */
+	BusFault_Handler,         /* -11 Bus Fault Handler */
+	UsageFault_Handler,       /* -10 Usage Fault Handler */
+	SecureFault_Handler,      /*  -9 Secure Fault Handler */
+	0,                        /*     Reserved */
+	0,                        /*     Reserved */
+	0,                        /*     Reserved */
+	SVC_Handler,              /*  -5 SVCall Handler */
+	DebugMon_Handler,         /*  -4 Debug Monitor Handler */
+	0,                        /*     Reserved */
+	PendSV_Handler,           /*  -2 PendSV Handler */
+	SysTick_Handler,          /*  -1 SysTick Handler */
+
+	/* Interrupts */
+	WWDG_IRQHandler,
 	PVD_PVM_IRQHandler,
 	TAMP_STAMP_IRQHandler,
 	RTC_WKUP_IRQHandler,
