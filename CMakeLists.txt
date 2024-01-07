@@ -17,11 +17,31 @@ project(
     LANGUAGES C ASM
 )
 
-add_compile_definitions(
+include_directories(
+    ${CMAKE_CURRENT_LIST_DIR}/User/include
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Include
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include/m-profile
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include
+)
+
+file(
+    GLOB SRC
+    ${CMAKE_CURRENT_LIST_DIR}/User/source/*.c
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
+    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
+)
+
+add_executable(${PROJECT_NAME} ${SRC})
+
+target_compile_definitions(
+    ${CMAKE_PROJECT_NAME}
+    PUBLIC
     STM32L476xx
 )
 
-add_compile_options(
+target_compile_options(
+    ${CMAKE_PROJECT_NAME}
+    PUBLIC
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
@@ -33,27 +53,16 @@ add_compile_options(
     -fdata-sections
 )
 
-add_link_options(
+target_link_options(
+    ${CMAKE_PROJECT_NAME}
+    PUBLIC
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
-    -Wl,--gc-sections
-    --specs=nosys.specs
+    # -nostartfiles           # use custom startup file
+    --specs=nano.specs      # use libc_nano.a instead of libc.a
+    --specs=nosys.specs     # use libnosys.a
+    -Wl,--gc-sections       # enable garbage collection of unused sections
+    -Wl,--trace             # prints name of input files (use --verbose for more detailed information)
     -T "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
-
-file(
-    GLOB SRC
-    ${CMAKE_CURRENT_LIST_DIR}/User/source/*.c
-    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
-    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
-)
-
-include_directories(
-    ${CMAKE_CURRENT_LIST_DIR}/User/include
-    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Device/ST/STM32L4xx/Include
-    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include/m-profile
-    ${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core/Include
-)
-
-add_executable(${PROJECT_NAME} ${SRC})

@@ -75,7 +75,6 @@ MEMORY
  *   __copy_table_end__
  *   __zero_table_start__
  *   __zero_table_end__
- *   __etext          (deprecated)
  *   __data_start__
  *   __preinit_array_start
  *   __preinit_array_end

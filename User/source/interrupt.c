@@ -20,56 +20,22 @@ void SysTick_Handler() {
 	//SysTick_ms == 1000 ? SysTick_ms = 0 : SysTick_ms++;
 }
 
-volatile uint8_t msg[100] = {0};
-volatile uint8_t tx_cnt = 0;
+volatile uint8_t fifo[20] = {0};
 volatile uint8_t rx_cnt = 0;
+volatile uint8_t tx_cnt = 0;
 
-void USART2_IRQHandler() {
+void USART2_IRQHandler(void) {
 	/* A byte is received */
 	if ( (USART2->ISR & USART_ISR_RXNE_Msk) == USART_ISR_RXNE_Msk ) {
-		msg[rx_cnt++] = USART2->RDR; /* This clears RXNE flag */
-
-		// Enable USART IDLE flag
-    	USART2->CR1 |= 1 << USART_CR1_IDLEIE_Pos;
-	}
-
-	/* All bytes are received, prepare for echoing */
-	if ( (USART2->ISR & USART_ISR_IDLE_Msk) == USART_ISR_IDLE_Msk ) {
-		// Disable USART2 receiver
-		USART2->CR1 &= ~USART_CR1_RE_Msk;
-
-		// Disable USART2 IDLE interrupt
-		USART2->CR1 &= ~USART_CR1_IDLEIE_Msk;
-
-		// Clear IDLE flag
-		USART2->ICR |= 1 << USART_ICR_IDLECF_Pos;
-
-		// Enable USART2 transmitter
-		USART2->CR1 |= 1 << USART_CR1_TE_Pos;
-
-		// Enable USART2 TXE interrupt
-		USART2->CR1 |= 1 << USART_CR1_TXEIE_Pos;
+		// Read RX data, this clears RXNE flag
+		fifo[rx_cnt % 20] = (uint8_t) USART2->RDR;
+		rx_cnt++;
 	}
 
 	/* A byte can be transmitted */
 	if ( (USART2->ISR & USART_ISR_TXE_Msk) == USART_ISR_TXE_Msk ) {
-		if (tx_cnt < rx_cnt) {
-			USART2->TDR = msg[tx_cnt++]; /* This clears TXE flag */
-		} else {
-			/* All bytes are transmitted, preparing for listening */
-
-			// Reset byte counter
-			tx_cnt = 0;
-			rx_cnt = 0;
-
-			// Disable USART2 transmitter
-			USART2->CR1 &= ~USART_CR1_TE_Msk;
-
-			// Disable USART2 TXE interrupt
-			USART2->CR1 &= ~USART_CR1_TXEIE_Msk;
-
-			// Enable USART2 receiver
-			USART2->CR1 |= 1 << USART_CR1_RE_Pos;
-		}
+		// Write TX data, this clears TXE flag
+		USART2->TDR = fifo[tx_cnt % 20];
+		tx_cnt++;
 	}
 }

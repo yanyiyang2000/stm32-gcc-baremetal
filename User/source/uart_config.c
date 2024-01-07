@@ -24,7 +24,7 @@ void UART2_config() {
     USART2->CR1 &= ~USART_CR1_UE_Msk;
 
     // Set USART2 baud rate to 1200
-    USART2->BRR = (uint16_t)(SystemCoreClock / 1200);
+    USART2->BRR = (uint16_t)(SystemCoreClock / 115200);
 
     // Set USART2 data bits to 8 (M1 = 0, M0 = 0)
     USART2->CR1 &= ~USART_CR1_M1_Msk;
@@ -38,6 +38,9 @@ void UART2_config() {
 
     // Enable USART2 receiver
     USART2->CR1 |= 1 << USART_CR1_RE_Pos;
+
+    // Enable USART2 transmitter
+    USART2->CR1 |= 1 << USART_CR1_TE_Pos;
 
     /**
      * Note: Interrupt should be enabled after USART2 TX/RX is enabled.
