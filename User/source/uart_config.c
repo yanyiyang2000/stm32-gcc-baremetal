@@ -4,8 +4,8 @@
 #include "uart_config.h"
 
 /**
- * This function configures USART2 as 1200-8-N-1, namely,
- *   - Baud rate : 1200
+ * This function configures USART2 as 115200-8-N-1, namely,
+ *   - Baud rate : 115200
  *   - Data bits : 8
  *   - Parity bit: None
  *   - Stop bits : 1
@@ -17,13 +17,10 @@ void UART2_config() {
     // Enable USART2 APB1 interface clock
     RCC->APB1ENR1 |= 1 << RCC_APB1ENR1_USART2EN_Pos;
 
-    // Reset USART2
-    // RCC->APB1RSTR1 |= 1 << RCC_APB1RSTR1_USART2RST_Pos;
-
     // Disable USART2
     USART2->CR1 &= ~USART_CR1_UE_Msk;
 
-    // Set USART2 baud rate to 1200
+    // Set USART2 baud rate to 115200
     USART2->BRR = (uint16_t)(SystemCoreClock / 115200);
 
     // Set USART2 data bits to 8 (M1 = 0, M0 = 0)
@@ -43,10 +40,7 @@ void UART2_config() {
     USART2->CR1 |= 1 << USART_CR1_TE_Pos;
 
     /**
-     * Note: Interrupt should be enabled after USART2 TX/RX is enabled.
+     * Note: Interrupts should be enabled after USART2 TX/RX is enabled.
      * TODO: What is the correct approach here? 
      */
-
-    // Enable USART2 RXNE interrupt
-    USART2->CR1 |= 1 << USART_CR1_RXNEIE_Pos;
 }

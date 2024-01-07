@@ -29,7 +29,5 @@ int main() {
 	/* Configure UART2 transmitter and receiver */
 	UART2_config();
 
-	while (1) {
-		// printf("hello");
-	}
+	while (1) {}
 }
