@@ -106,7 +106,12 @@ arm-none-eabi-gcc -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -E -dM -< /dev/null 
 
 In the `build` directory, use the following command to view the dieassembly code:
 ```bash
-arm-none-eabi-objdump -d -s <PROJECT_NAME>.elf
+arm-none-eabi-objdump -d <PROJECT_NAME>.elf
+```
+
+In the `build` directory, use the following command to view the symbol table:
+```bash
+arm-none-eabi-objdump -t <PROJECT_NAME>.elf
 ```
 
 In the `build` directory, use the following command to view the output information:

@@ -1,5 +1,5 @@
 /******************************************************************************
- * @file     Device_gcc.ld
+ * @file     stm32l4xx_gcc.ld
  * @brief    GNU Linker Script for Cortex-M based device
  * @version  V2.3.0
  * @date     23. June 2023
@@ -28,7 +28,7 @@
 
 /*---------------------- Flash Configuration ----------------------------------
   <h> Flash Configuration
-    <o0> Flash Base Address <0x0-0xFFFFFFFF:8>
+    <o0> Flash Base Address    <0x0-0xFFFFFFFF:8>
     <o1> Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
@@ -47,7 +47,7 @@ __RAM_SIZE = 96K;
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
     <o0> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
-    <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+    <o1> Heap Size (in Bytes)  <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
 __STACK_SIZE = 0x00000200;
