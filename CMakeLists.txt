@@ -45,12 +45,12 @@ target_compile_options(
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mthumb
-    -O0
-    -g3
-    -Wall
-    -Wno-missing-attributes
-    -ffunction-sections
-    -fdata-sections
+    -O0                     # no optimization
+    -g3                     # maximum debugging information
+    -Wall                   # enable all warnings
+    -Wno-missing-attributes # disable warning about missing attributes
+    -ffunction-sections     # place each function in its own named section in the output object file
+    -fdata-sections         # place each data in its own named section in the output object file
 )
 
 target_link_options(

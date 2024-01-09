@@ -111,7 +111,7 @@ arm-none-eabi-objdump -d <PROJECT_NAME>.elf
 
 In the `build` directory, use the following command to view the symbol table:
 ```bash
-arm-none-eabi-objdump -t <PROJECT_NAME>.elf
+arm-none-eabi-readelf -t <PROJECT_NAME>.elf
 ```
 
 In the `build` directory, use the following command to view the output information:
