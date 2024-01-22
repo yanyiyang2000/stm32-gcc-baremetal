@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/lib/arm-none-eabi/include/**"
+            ],
+            "defines": [
+                "STM32L476xx"
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "gnu++11",
+            "intelliSenseMode": "linux-gcc-arm",
+            "forcedInclude": [
+                "${workspaceFolder}/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h",
+            ]
+        }
+    ],
+    "version": 4
+}
