@@ -24,7 +24,7 @@
  *   - Transfer complete interrupt disabled (default)
  * 
  *   - 32 data to transfer
- *   - Memory address is an array defined in demo_2_config.h
+ *   - Memory address is the address of an array defined in demo_2_config.h
  *   - Peripheral address is DHR12R2 register of DAC1
  *   - DMA request source is DAC1 channel 2
  * 
