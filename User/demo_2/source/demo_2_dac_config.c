@@ -16,8 +16,8 @@
  *   - Trigger enabled
  * 
  * Note: Every 50 ms, DAC1 channel 4 is loaded with a new value via 
- *       DMA1 channel 2. This is done by configurating TIM6 auto-reload 
- *       value in demo_2_timer_config.c.
+ *       DMA1 channel 2. The interval can be configured by modifying 
+ *       TIM6 auto-reload value in demo_2_timer_config.c.
  * 
  * Reference: RM0351, p.626; p.639-640
  */
