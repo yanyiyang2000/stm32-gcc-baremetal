@@ -13,7 +13,7 @@ add_subdirectory(
 # add more demo directory here
 
 add_executable(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
     ${CMAKE_CURRENT_LIST_DIR}/common/source/cortex_m4_crt0.S
@@ -21,7 +21,7 @@ add_executable(
 )
 
 target_include_directories(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     PUBLIC
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include/m-profile
@@ -33,13 +33,13 @@ target_include_directories(
 )
 
 target_compile_definitions(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     PUBLIC
     STM32L476xx
 )
 
 target_compile_options(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     PUBLIC
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
@@ -53,7 +53,7 @@ target_compile_options(
 )
 
 target_link_directories(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/common
     ${CMAKE_CURRENT_LIST_DIR}/demo_1
@@ -62,13 +62,13 @@ target_link_directories(
 )
 
 target_link_libraries(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     common
     demo_2  # change this entry to the directory of the demo being used
 )
 
 target_link_options(
-    ${CMAKE_PROJECT_NAME}
+    firmware
     PUBLIC
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16

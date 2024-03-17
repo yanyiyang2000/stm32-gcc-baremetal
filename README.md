@@ -130,7 +130,7 @@ cmake --build ./build
 ## Flashing
 In the `build` directory, use the following command:
 ```bash
-openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "program <PROJECT_NAME>.elf verify reset exit"
+openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "program User/firmware.elf verify reset exit"
 ```
 
 ## Cleaning
@@ -147,20 +147,20 @@ arm-none-eabi-gcc -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -E -dM -< /dev/null 
 
 In the `build` directory, use the following command to view the dieassembly code:
 ```bash
-arm-none-eabi-objdump -d <PROJECT_NAME>.elf
+arm-none-eabi-objdump -d User/firmware.elf
 ```
 
 In the `build` directory, use the following command to view the symbol table:
 ```bash
-arm-none-eabi-objdump -t <PROJECT_NAME>.elf
+arm-none-eabi-objdump -t User/firmware.elf
 ```
 
 In the `build` directory, use the following command to view the output information:
 ```bash
-arm-none-eabi-readelf -S <PROJECT_NAME>.elf
+arm-none-eabi-readelf -S User/firmware.elf
 ```
 
 In the `build` directory, use the following command to view the size of the executable:
 ```bash
-arm-none-eabi-size <PROJECT_NAME>.elf
+arm-none-eabi-size User/firmware.elf
 ```

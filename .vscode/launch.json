@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceRoot}/build/test.elf",
+            "program": "${workspaceRoot}/build/User/firmware.elf",
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb-multiarch",
             "miDebuggerServerAddress": "localhost:3333",

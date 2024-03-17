@@ -14,7 +14,7 @@
             "cppStandard": "gnu++11",
             "intelliSenseMode": "linux-gcc-arm",
             "forcedInclude": [
-                "${workspaceFolder}/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h",
+                "${workspaceFolder}/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h"
             ]
         }
     ],
