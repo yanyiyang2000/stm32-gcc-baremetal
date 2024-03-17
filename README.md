@@ -99,7 +99,6 @@ User
 │   ├── CMakeLists.txt
 │   ├── include
 │   │   └── demo_2_config.h
-│   ├── README.md
 │   └── source
 │       └── demo_2_xxx.c
 └── main.c
