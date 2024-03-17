@@ -10,8 +10,11 @@
 ## Prerequisites
 Install the following packages:
 - `gcc-arm-none-eabi`
+- `binutils-arm-none-eabi`
 - `libnewlib-arm-none-eabi`
 - `gdb-multiarch`
+- `cmake`
+- `make`
 - `openocd`
 
 ## Project Structure
