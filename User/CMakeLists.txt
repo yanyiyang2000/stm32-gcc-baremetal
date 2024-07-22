@@ -70,12 +70,13 @@ target_link_libraries(
 target_link_options(
     firmware
     PUBLIC
-    -mcpu=cortex-m4
-    -mfpu=fpv4-sp-d16
     -mthumb
-    -nostartfiles               # use custom crt0 (otherwise newlib's crt0.S will be used)
+    -mcpu=cortex-m4
+    -mfloat-abi=hard
+    -mfpu=fpv4-sp-d16
+    -nostartfiles               # use custom crt0.S (otherwise newlib's crt0.S will be used)
     --specs=nano.specs          # use libc_nano.a (otherwise libc.a will be used)
-    --specs=nosys.specs         # use libnosys.a
+    --specs=nosys.specs         # use libnosys.a (provides stub syscalls such as `_exit` used by the custom crt0.S)
     -Wl,--gc-sections           # enable garbage collection of unused sections
     -Wl,--trace                 # prints name of input files (use --verbose for more detailed information)
     -Wl,--print-memory-usage

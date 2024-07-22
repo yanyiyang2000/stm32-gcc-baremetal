@@ -26,9 +26,10 @@ target_compile_definitions(
 target_compile_options(
     demo_common
     PUBLIC
-    -mcpu=cortex-m4
-    -mfpu=fpv4-sp-d16
     -mthumb
+    -mcpu=cortex-m4
+    -mfloat-abi=hard
+    -mfpu=fpv4-sp-d16
     -O0                         # no optimization
     -g3                         # maximum debugging information
     -Wall                       # enable all warnings
