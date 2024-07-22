@@ -1,5 +1,5 @@
 add_subdirectory(
-    ${CMAKE_CURRENT_LIST_DIR}/common
+    ${CMAKE_CURRENT_LIST_DIR}/demo_common
 )
 
 add_subdirectory(
@@ -16,7 +16,7 @@ add_executable(
     firmware
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
-    ${CMAKE_CURRENT_LIST_DIR}/common/source/cortex_m4_crt0.S
+    ${CMAKE_CURRENT_LIST_DIR}/demo_common/source/cortex_m4_crt0.S
     main.c
 )
 
@@ -26,7 +26,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include/m-profile
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Include
-    ${CMAKE_CURRENT_LIST_DIR}/common/include
+    ${CMAKE_CURRENT_LIST_DIR}/demo_common/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_1/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_2/include
     # add more demo includes here
@@ -55,7 +55,7 @@ target_compile_options(
 target_link_directories(
     firmware
     PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/common
+    ${CMAKE_CURRENT_LIST_DIR}/demo_common
     ${CMAKE_CURRENT_LIST_DIR}/demo_1
     ${CMAKE_CURRENT_LIST_DIR}/demo_2
     # add more demo libraries here
@@ -63,7 +63,7 @@ target_link_directories(
 
 target_link_libraries(
     firmware
-    common
+    demo_common
     demo_2  # change this entry to the directory of the demo being used
 )
 

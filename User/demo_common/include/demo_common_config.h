@@ -1,5 +1,5 @@
-#ifndef COMMON_CONFIG_H
-#define COMMON_CONFIG_H
+#ifndef DEMO_COMMON_CONFIG_H
+#define DEMO_COMMON_CONFIG_H
 
 /**********************************************************/
 /*           MSI Oscillator Clock Configuration           */
@@ -36,4 +36,4 @@ void UART2_config();
 void USART2_IRQHandler();
 /**********************************************************/
 
-#endif /* COMMON_CONFIG_H */
+#endif /* DEMO_COMMON_CONFIG_H */

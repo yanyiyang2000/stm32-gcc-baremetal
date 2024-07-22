@@ -5,7 +5,7 @@
 #include "stm32l476xx.h"
 
 /* Application API */
-#include "common_config.h"
+#include "demo_common_config.h"
 
 
 volatile uint8_t fifo[20] = {0};

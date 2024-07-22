@@ -2,7 +2,7 @@
 #include "stm32l476xx.h"
 
 /* Application API */
-#include "common_config.h"
+#include "demo_common_config.h"
 
 
 /**

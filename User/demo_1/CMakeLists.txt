@@ -12,7 +12,7 @@ target_include_directories(
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include/m-profile
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Include
-    ${PROJECT_SOURCE_DIR}/User/common/include
+    ${PROJECT_SOURCE_DIR}/User/demo_common/include
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
@@ -39,10 +39,10 @@ target_compile_options(
 target_link_directories(
     demo_1
     PUBLIC
-    ${PROJECT_SOURCE_DIR}/User/common
+    ${PROJECT_SOURCE_DIR}/User/demo_common
 )
 
 target_link_libraries(
     demo_1
-    common
+    demo_common
 )

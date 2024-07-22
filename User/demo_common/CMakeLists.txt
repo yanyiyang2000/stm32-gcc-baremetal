@@ -1,15 +1,15 @@
 add_library(
-    common
+    demo_common
     OBJECT # force interrupt service routine to be included
-    ${CMAKE_CURRENT_LIST_DIR}/source/common_clock_config.c
-    ${CMAKE_CURRENT_LIST_DIR}/source/common_gpio_config.c
-    ${CMAKE_CURRENT_LIST_DIR}/source/common_uart_config.c
-    ${CMAKE_CURRENT_LIST_DIR}/source/common_isr.c
+    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_clock_config.c
+    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_gpio_config.c
+    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_uart_config.c
+    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_isr.c
     ${CMAKE_CURRENT_LIST_DIR}/source/syscalls.c
 )
 
 target_include_directories(
-    common
+    demo_common
     PUBLIC
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include
     ${PROJECT_SOURCE_DIR}/CMSIS/Core/Include/m-profile
@@ -18,13 +18,13 @@ target_include_directories(
 )
 
 target_compile_definitions(
-    common
+    demo_common
     PUBLIC
     STM32L476xx
 )
 
 target_compile_options(
-    common
+    demo_common
     PUBLIC
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16

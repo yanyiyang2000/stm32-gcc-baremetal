@@ -4,7 +4,7 @@
 #include "core_cm4.h"
 
 /* Application API */
-#include "common_config.h"
+#include "demo_common_config.h"
 
 
 /**
