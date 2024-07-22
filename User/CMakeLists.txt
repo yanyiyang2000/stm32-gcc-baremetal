@@ -41,9 +41,10 @@ target_compile_definitions(
 target_compile_options(
     firmware
     PUBLIC
-    -mcpu=cortex-m4
-    -mfpu=fpv4-sp-d16
     -mthumb
+    -mcpu=cortex-m4
+    -mfloat-abi=hard
+    -mfpu=fpv4-sp-d16
     -O0                         # no optimization
     -g3                         # maximum debugging information
     -Wall                       # enable all warnings
@@ -63,6 +64,7 @@ target_link_directories(
 
 target_link_libraries(
     firmware
+    PUBLIC
     demo_common
     demo_2  # change this entry to the directory of the demo being used
 )

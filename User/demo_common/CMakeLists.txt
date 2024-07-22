@@ -3,7 +3,7 @@ add_library(
     OBJECT # force interrupt service routine to be included
     ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_clock_config.c
     ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_gpio_config.c
-    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_uart_config.c
+    ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_usart_config.c
     ${CMAKE_CURRENT_LIST_DIR}/source/demo_common_isr.c
     ${CMAKE_CURRENT_LIST_DIR}/source/syscalls.c
 )

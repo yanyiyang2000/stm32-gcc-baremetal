@@ -27,7 +27,7 @@ void demo_1_enter() {
 	GPIO_PA3_config();
 
 	/* Configure UART2 transmitter and receiver */
-	UART2_config();
+	USART2_config();
 
 	while (1) {}
 }

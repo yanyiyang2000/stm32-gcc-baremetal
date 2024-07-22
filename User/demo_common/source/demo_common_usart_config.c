@@ -13,7 +13,7 @@
  *   - Parity bit: None
  *   - Stop bits : 1
  */
-void UART2_config() {
+void USART2_config() {
     // Enable USART2 interrupt
     NVIC_EnableIRQ(USART2_IRQn);
 
