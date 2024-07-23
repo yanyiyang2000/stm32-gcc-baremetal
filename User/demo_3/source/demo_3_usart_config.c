@@ -1,9 +1,12 @@
+/* Standard library API */
+#include <stdint.h>
+
 /* Device API */
 #include "stm32l476xx.h"
 #include "core_cm4.h"
 
 /* Application API */
-#include "demo_common_config.h"
+#include "demo_3_config.h"
 
 
 /**
@@ -42,8 +45,6 @@ void USART2_config() {
     // Enable USART2 transmitter
     USART2->CR1 |= 1 << USART_CR1_TE_Pos;
 
-    /**
-     * Note: Interrupts should be enabled after USART2 TX/RX is enabled.
-     * TODO: What is the correct approach here? 
-     */
+    // Enable RXNE (receiver not empty) interrupt
+    USART2->CR1 |= 1 << USART_CR1_RXNEIE_Pos;
 }

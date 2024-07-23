@@ -5,7 +5,7 @@
 #include "stm32l476xx.h"
 
 /* Application API */
-#include "demo_common_config.h"
+#include "demo_3_config.h"
 
 
 volatile uint8_t fifo[20] = {0};
@@ -26,4 +26,10 @@ void USART2_IRQHandler() {
 		USART2->TDR = fifo[tx_cnt % 20];
 		tx_cnt++;
 	}
+}
+
+volatile uint64_t SysTick_ms = 0;
+
+void SysTick_Handler() {
+	SysTick_ms += 1;
 }

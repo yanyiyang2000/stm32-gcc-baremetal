@@ -10,6 +10,10 @@ add_subdirectory(
     ${CMAKE_CURRENT_LIST_DIR}/demo_2
 )
 
+add_subdirectory(
+    ${CMAKE_CURRENT_LIST_DIR}/demo_3
+)
+
 # add more demo directory here
 
 add_executable(
@@ -29,6 +33,7 @@ target_include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/demo_common/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_1/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_2/include
+    ${CMAKE_CURRENT_LIST_DIR}/demo_3/include
     # add more demo includes here
 )
 
@@ -59,6 +64,7 @@ target_link_directories(
     ${CMAKE_CURRENT_LIST_DIR}/demo_common
     ${CMAKE_CURRENT_LIST_DIR}/demo_1
     ${CMAKE_CURRENT_LIST_DIR}/demo_2
+    ${CMAKE_CURRENT_LIST_DIR}/demo_3
     # add more demo libraries here
 )
 
@@ -66,7 +72,7 @@ target_link_libraries(
     firmware
     PUBLIC
     demo_common
-    demo_2  # change this entry to the directory of the demo being used
+    demo_3  # change this entry to the directory of the demo being used
 )
 
 target_link_options(

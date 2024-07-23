@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "demo_2_config.h": "c",
+        "demo_1_config.h": "c",
+        "system_stm32l4xx.h": "c",
+        "stm32l476xx.h": "c",
+        "core_cm4.h": "c"
+    }
+}
