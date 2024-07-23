@@ -138,6 +138,41 @@ In the `build` directory, use the following command:
 rm -rf *
 ```
 
+## Debugging
+The debugging process requires two shell sessions.
+
+### Session 1
+In any directory, use the following command:
+```bash
+openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "gdb_port 3333"
+```
+
+### Session 2
+In the `build` directory, open another terminal, use the following command:
+```bash
+gdb-multiarch User/firmware.elf
+```
+
+After seeing the prompt from GDB, use the following command:
+```bash
+target remote localhost:3333
+```
+
+### Frequently Used GDB Commands
+| Command              | Description                            |
+| -------------------- | -------------------------------------- |
+| `monitor reset halt` | Reset and halt                         |
+| `info breakpoints`   | List all breakpoints                   |
+| `delete 2`           | Delete breakpoint 2                    |
+| `b foo.c:18`         | Set a breakpoint at line 18 of `foo.c` |
+| `p foo`              | Print `foo` in decimal format          |
+| `p/t foo`            | Print `foo` in binary format           |
+| `p/x foo`            | Print `foo` in hexadecimal format      |
+| `c`                  | Continue                               |
+| `s`                  | Step into                              |
+| `n`                  | Step over                              |
+| `bt`                 | Print trace of all frames              |
+
 ## Tools
 Use the following command to shows all the predefined macros
 ```bash
