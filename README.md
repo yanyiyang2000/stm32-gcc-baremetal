@@ -1,11 +1,16 @@
 # Table of Contents
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
+    - [CMSIS](#cmsis)
+    - [User](#user)
 - [Setting Project Name](#setting-project-name)
 - [Building](#building)
 - [Flashing](#flashing)
 - [Cleaning](#cleaning)
 - [Debugging](#debugging)
+    - [Session 1](#session-1)
+    - [Session 2](#session-2)
+    - [Frequently Used GDB Commands](#frequently-used-gdb-commands)
 - [Tools](#tools)
 
 # Prerequisites
