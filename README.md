@@ -87,12 +87,12 @@ The `User` directory contains demonstration code.
 ```bash
 User
 ├── CMakeLists.txt
-├── common
+├── demo_common
 │   ├── CMakeLists.txt
 │   ├── include
-│   │   └── common_config.h
+│   │   └── demo_common_config.h
 │   └── source
-│       ├── common_xxx.c
+│       ├── demo_common_xxx.c
 │       ├── cortex_m4_crt0.S
 │       └── syscalls.c
 ├── demo_1
@@ -110,7 +110,7 @@ User
 └── main.c
 ```
 
-`common` directory contains header and source code used by all demonstrations.
+`demo_common` directory contains header and source code used by all demonstrations.
 
 `demo_x` directories contain header and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
 
