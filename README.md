@@ -1,13 +1,14 @@
-## Table of Contents
+# Table of Contents
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
 - [Setting Project Name](#setting-project-name)
 - [Building](#building)
 - [Flashing](#flashing)
 - [Cleaning](#cleaning)
+- [Debugging](#debugging)
 - [Tools](#tools)
 
-## Prerequisites
+# Prerequisites
 Install the following packages:
 - `gcc-arm-none-eabi`
 - `binutils-arm-none-eabi`
@@ -17,9 +18,9 @@ Install the following packages:
 - `make`
 - `openocd`
 
-## Project Structure
+# Project Structure
 
-### CMSIS
+## CMSIS
 The `CMSIS` directory contains components provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [ST](https://github.com/STMicroelectronics/cmsis_device_l4).
 
 ```bash
@@ -75,7 +76,7 @@ The components are selected based on:
 
 When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
 
-### User
+## User
 The `User` directory contains demonstration code.
 
 ```bash
@@ -110,7 +111,7 @@ User
 
 `main.c` invokes a specifc demonstration by calling the respective `demo_x_enter` function.
 
-## Setting Project Name
+# Setting Project Name
 In the project root directory, modify the <PROJECT_NAME> entry in `CMakeLists.txt`:
 ```cmake
 project(
@@ -119,35 +120,35 @@ project(
 )
 ```
 
-## Building
+# Building
 In the project root directory, use the following commands one by one:
 ```bash
 cmake -B build .
 cmake --build ./build
 ```
 
-## Flashing
+# Flashing
 In the `build` directory, use the following command:
 ```bash
 openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "program User/firmware.elf verify reset exit"
 ```
 
-## Cleaning
+# Cleaning
 In the `build` directory, use the following command:
 ```bash
 rm -rf *
 ```
 
-## Debugging
+# Debugging
 The debugging process requires two shell sessions.
 
-### Session 1
+## Session 1
 In any directory, use the following command:
 ```bash
 openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "gdb_port 3333"
 ```
 
-### Session 2
+## Session 2
 In the `build` directory, open another terminal, use the following command:
 ```bash
 gdb-multiarch User/firmware.elf
@@ -158,7 +159,7 @@ After seeing the prompt from GDB, use the following command:
 target remote localhost:3333
 ```
 
-### Frequently Used GDB Commands
+## Frequently Used GDB Commands
 | Command              | Description                            |
 | -------------------- | -------------------------------------- |
 | `monitor reset halt` | Reset and halt                         |
@@ -173,7 +174,7 @@ target remote localhost:3333
 | `n`                  | Step over                              |
 | `bt`                 | Print trace of all frames              |
 
-## Tools
+# Tools
 Use the following command to shows all the predefined macros
 ```bash
 arm-none-eabi-gcc -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -E -dM -< /dev/null | sort
