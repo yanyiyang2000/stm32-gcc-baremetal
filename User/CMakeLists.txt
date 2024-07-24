@@ -20,7 +20,7 @@ add_executable(
     firmware
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.c
     ${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Source/gcc/startup_stm32l4xx.c
-    ${CMAKE_CURRENT_LIST_DIR}/demo_common/source/cortex_m4_crt0.S
+    ${CMAKE_CURRENT_LIST_DIR}/demo_common/source/crt0.S
     main.c
 )
 

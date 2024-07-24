@@ -30,7 +30,7 @@ void USART2_config();
 extern volatile uint64_t SysTick_ms;
 
 void SysTick_Handler();
-void USART2_IRQHandler();
+// void USART2_IRQHandler();
 /******************************************************************************/
 
 

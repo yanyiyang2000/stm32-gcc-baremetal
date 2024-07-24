@@ -1,3 +1,6 @@
+/* Standard library API */
+#include "stdio.h"
+
 /* Device API */
 #include "stm32l476xx.h"
 
@@ -20,8 +23,11 @@ void demo_3_enter() {
 	GPIO_PA2_config();
 	GPIO_PA3_config();
 
-	// Configure UART2 transmitter and receiver
+	// Configure USART2 transmitter and receiver
 	USART2_config();
 
-	while (1) {}
+	// Send a string through USART2
+	while (1) {
+		printf("hello!\n");
+	}
 }

@@ -1,6 +1,3 @@
-/* Standard library API */
-#include <unistd.h>
-
 /* Device API */
 #include "stm32l476xx.h"
 

@@ -168,8 +168,8 @@ target remote localhost:3333
 | Command              | Description                            |
 | -------------------- | -------------------------------------- |
 | `monitor reset halt` | Reset and halt                         |
-| `info breakpoints`   | List all breakpoints                   |
-| `delete 2`           | Delete breakpoint 2                    |
+| `i b`                | List all breakpoints                   |
+| `d 2`                | Delete breakpoint 2                    |
 | `b foo.c:18`         | Set a breakpoint at line 18 of `foo.c` |
 | `p foo`              | Print `foo` in decimal format          |
 | `p/t foo`            | Print `foo` in binary format           |
