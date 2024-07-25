@@ -26,8 +26,8 @@ void USART2_config() {
     // Enable USART2 APB1 interface clock
     RCC->APB1ENR1 |= 1 << RCC_APB1ENR1_USART2EN_Pos;
 
-    // Set USART2 baud rate to 115200
-    USART2->BRR = (uint16_t)(SystemCoreClock / 115200);
+    // Set USART2 baud rate to 9600
+    USART2->BRR = (uint16_t)(SystemCoreClock / 9600);
 
     // Set USART2 data bits to 8 (M1 = 0, M0 = 0)
     USART2->CR1 &= ~USART_CR1_M1_Msk;
