@@ -12,6 +12,7 @@
     - [Session 2](#session-2)
     - [Frequently Used GDB Commands](#frequently-used-gdb-commands)
 - [Tools](#tools)
+- [References](#references)
 
 # Prerequisites
 Install the following packages:
@@ -204,3 +205,9 @@ In the `build` directory, use the following command to view the size of the exec
 ```bash
 arm-none-eabi-size User/firmware.elf
 ```
+
+# References
+- [ARMv7-M Architecture Reference Manual (DDI 0403)](https://developer.arm.com/documentation/ddi0403/latest/)
+- [STM32L47xxx Reference Manual (RM0351)](https://www.st.com/resource/en/reference_manual/rm0351-stm32l47xxx-stm32l48xxx-stm32l49xxx-and-stm32l4axxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
+- [STM32L476xx Datasheet (DS10198)](https://www.st.com/resource/en/datasheet/stm32l476je.pdf)
+- [STM32 Nucleo-64 Boards User Manual (UM1724)](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
