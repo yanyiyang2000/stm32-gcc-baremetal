@@ -192,7 +192,7 @@ arm-none-eabi-objdump -d User/firmware.elf
 
 In the `build` directory, use the following command to view the symbol table:
 ```bash
-arm-none-eabi-objdump -t User/firmware.elf
+arm-none-eabi-objdump -t User/firmware.elf | sort
 ```
 
 In the `build` directory, use the following command to view the output information:

@@ -5,6 +5,13 @@
 
 
 /******************************************************************************/
+/*                              Global Variable                               */
+
+extern volatile uint64_t demo_3_systick_ms;
+/******************************************************************************/
+
+
+/******************************************************************************/
 /*                      GPIO Configurations (for USART2)                      */
 
 void GPIO_PA2_config();
@@ -22,15 +29,8 @@ void USART2_config();
 /******************************************************************************/
 /*                             Interrupt Handlers                             */
 
-/**
- * @brief Global variable indicating current time since boot up in milliseconds.
- * 
- * @note This variable is incremented within system tick interrupt handler.
- */
-extern volatile uint64_t SysTick_ms;
-
 void SysTick_Handler();
-// void USART2_IRQHandler();
+void USART2_IRQHandler();
 /******************************************************************************/
 
 

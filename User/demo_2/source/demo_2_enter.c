@@ -20,7 +20,7 @@ void demo_2_enter() {
     GPIO_PA5_config();
 
     // Generate wave data
-    util_generate_wave_data();
+    demo_2_util_populate_wave_data();
 
     // Configure DMA1 channel 4
     DMA1_CH4_Config();

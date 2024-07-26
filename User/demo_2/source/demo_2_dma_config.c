@@ -62,7 +62,7 @@ void DMA1_CH4_Config() {
     DMA1_Channel4->CNDTR = (uint16_t)40;
 
     // Set memory address
-    DMA1_Channel4->CMAR = (uint32_t)(&wave);
+    DMA1_Channel4->CMAR = (uint32_t)(&demo_2_wave_data);
 
     // Set peripheral address to DHR12R2 register of DAC1
     DMA1_Channel4->CPAR = (uint32_t)(&DAC1->DHR12R2);

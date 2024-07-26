@@ -8,18 +8,24 @@
 #include "demo_1_config.h"
 
 
-volatile uint64_t SysTick_ms = 0;
+/**
+ * This global variable is incremented by SysTick interrupt handler and is reset
+ * after reaching 1000.
+ */
+volatile uint64_t demo_1_systick_ms = 0;
 
 void SysTick_Handler() {
-    if (SysTick_ms == 1000) {
-        // Toggle GPIO port A pin 5 output
-        if ((GPIOA->ODR & GPIO_ODR_OD5_Msk) == 0) {
-            GPIOA->ODR |= 1 << GPIO_ODR_OD5_Pos;
-        } else {
-            GPIOA->ODR &= 0 << GPIO_ODR_OD5_Pos;
+    switch (demo_1_systick_ms) {
+        case 1000: {
+            // Toggle GPIO port A pin 5 output
+            GPIOA->ODR ^= GPIO_ODR_OD5_Msk;
+
+            demo_1_systick_ms = 0;
+            break;
         }
-        SysTick_ms = 0;
-    } else {
-        SysTick_ms++;
+
+        default:
+            demo_1_systick_ms++;
+            break;
     }
 }

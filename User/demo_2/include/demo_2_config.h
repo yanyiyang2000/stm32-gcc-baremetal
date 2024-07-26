@@ -3,13 +3,20 @@
 
 #include <stdint.h>
 
-/**
- * Global array containing data to be transferred into DHR12R2 register of DAC1 
- * channel 2.
- */
-extern volatile uint16_t wave[40];
 
-void util_generate_wave_data();
+/******************************************************************************/
+/*                              Global Variables                              */
+
+extern volatile uint64_t demo_2_systick_ms;
+extern volatile uint16_t demo_2_wave_data[40];
+/******************************************************************************/
+
+
+/******************************************************************************/
+/*                             Utility Functions                              */
+
+void demo_2_util_populate_wave_data();
+/******************************************************************************/
 
 
 /******************************************************************************/
@@ -42,13 +49,6 @@ void TIM6_Config();
 
 /******************************************************************************/
 /*                             Interrupt Handlers                             */
-
-/**
- * @brief Global variable indicating current time since boot up in milliseconds.
- * 
- * @note This variable is incremented within system tick interrupt handler.
- */
-extern volatile uint64_t SysTick_ms;
 
 void SysTick_Handler();
 /******************************************************************************/

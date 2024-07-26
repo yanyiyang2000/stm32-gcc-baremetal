@@ -4,9 +4,13 @@
 /* Application API */
 #include "demo_2_config.h"
 
-
-volatile uint64_t SysTick_ms = 0;
+/**
+ * This global variable indicates current time since boot up in milliseconds.
+ * 
+ * Note: This variable is incremented by SysTick interrupt handler.
+ */
+volatile uint64_t demo_2_systick_ms = 0;
 
 void SysTick_Handler() {
-    SysTick_ms += 1;
+    demo_2_systick_ms += 1;
 }

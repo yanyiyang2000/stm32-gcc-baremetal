@@ -3,6 +3,14 @@
 
 #include <stdint.h>
 
+
+/******************************************************************************/
+/*                              Global Variable                               */
+
+extern volatile uint64_t demo_1_systick_ms;
+/******************************************************************************/
+
+
 /******************************************************************************/
 /*                       GPIO Configurations (for LED)                        */
 
@@ -12,14 +20,6 @@ void GPIO_PA5_config();
 
 /******************************************************************************/
 /*                             Interrupt Handlers                             */
-
-/**
- * @brief Global variable indicating current system tick in milliseconds.
- * 
- * @note This variable is incremented within system tick interrupt handler and 
- *       is reset after reaching 1000.
- */
-extern volatile uint64_t SysTick_ms;
 
 void SysTick_Handler();
 /******************************************************************************/
