@@ -34,6 +34,7 @@ CMSIS
 ├── Core
 │   └── Include
 │       ├── cmsis_compiler.h
+|       ├── cmsis_gcc.h
 │       ├── cmsis_version.h
 │       ├── core_cm4.h
 │       └── m-profile
@@ -62,23 +63,25 @@ The MCU and toolchain used by this project is:
 | MCU                  | STM32L476RG   |
 | MCU series           | STM32L4       |
 | MCU CPU core         | ARM Cortex-M4 |
+| MCU CPU profile      | M             |
 | MCU CPU architecture | ARMv7E-M      |
 | Toolchain            | gcc           |
 
 The components are selected based on:
-| File                  | Why                    | Source |
-| --------------------- | ---------------------- | ------ |
-| `cmsis_compiler.h`    | Must be included       | ARM    |
-| `cmsis_version.h`     | Must be included       | ARM    |
-| `core_cm4.h`          | MCU CPU core           | ARM    |
-| `armv7m_mpu.h`        | MCU CPU architecture   | ARM    |
-| `cmsis_gcc_m.h`       | Toolchain              | ARM    |
-| `stm32l4xx_gcc.ld`    | Toolchain & MCU series | ST     |
-| `stm32l476xx.h`       | MCU                    | ST     |
-| `stm32l4xx.h`         | MCU series             | ST     |
-| `startup_stm32l4xx.c` | MCU series             | ST     |
-| `system_stm32l4xx.c`  | MCU series             | ST     |
-| `STM32L476.svd`       | MCU                    | ST     |
+| File                  | Why                         | Source |
+| --------------------- | --------------------------- | ------ |
+| `cmsis_compiler.h`    | Must be included            | ARM    |
+| `cmsis_version.h`     | Must be included            | ARM    |
+| `core_cm4.h`          | MCU CPU core                | ARM    |
+| `armv7m_mpu.h`        | MCU CPU architecture        | ARM    |
+| `cmsis_gcc.h`         | Toolchain                   | ARM    |
+| `cmsis_gcc_m.h`       | Toolchain & MCU CPU profile | ARM    |
+| `stm32l4xx_gcc.ld`    | Toolchain & MCU series      | ST     |
+| `stm32l476xx.h`       | MCU                         | ST     |
+| `stm32l4xx.h`         | MCU series                  | ST     |
+| `startup_stm32l4xx.c` | MCU series                  | ST     |
+| `system_stm32l4xx.c`  | MCU series                  | ST     |
+| `STM32L476.svd`       | MCU                         | ST     |
 
 When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
 
