@@ -13,14 +13,14 @@
  * This function is the entry point of demo 1.
  */
 void demo_1_enter() {
-	// Configure MSI to around 48 MHz
-	MSI_config();
+    // Configure MSI to around 48 MHz
+    MSI_config();
 
-	// Configure SysTick interrupt to be triggered every 1 ms
-	SysTick_config();
+    // Configure SysTick interrupt to be triggered every 1 ms
+    SysTick_config();
 
-	// Configure GPIO PA5 to power LED
-	GPIO_PA5_config();
+    // Configure GPIO PA5 to power LED
+    GPIO_PA5_config();
 
-	while (1) {}
+    while (1) {}
 }

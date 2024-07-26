@@ -15,6 +15,6 @@
  * Reference: DS1098, p.74
  */
 void GPIO_PA5_config() {
-	// Enable GPIO port A AHB2 interface clock
-	RCC->AHB2ENR |= 1 << RCC_AHB2ENR_GPIOAEN_Pos;
+    // Enable GPIO port A AHB2 interface clock
+    RCC->AHB2ENR |= 1 << RCC_AHB2ENR_GPIOAEN_Pos;
 }

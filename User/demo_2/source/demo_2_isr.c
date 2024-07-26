@@ -8,5 +8,5 @@
 volatile uint64_t SysTick_ms = 0;
 
 void SysTick_Handler() {
-	SysTick_ms += 1;
+    SysTick_ms += 1;
 }
