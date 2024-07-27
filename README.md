@@ -25,6 +25,15 @@ Install the following packages:
 - `openocd`
 
 # Project Structure
+The Development board, MCU and toolchain used by this project is:
+| Key                  | Value           |
+| -------------------- | --------------- |
+| Development board    | STM32 Nucleo-64 |
+| MCU                  | STM32L476RG     |
+| MCU series           | STM32L4         |
+| MCU CPU core         | ARM Cortex-M4   |
+| MCU CPU architecture | ARMv7E-M        |
+| Toolchain            | gcc             |
 
 ## CMSIS
 The `CMSIS` directory contains components provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [ST](https://github.com/STMicroelectronics/cmsis_device_l4).
@@ -57,31 +66,21 @@ CMSIS
     └── STM32L476.svd
 ```
 
-The MCU and toolchain used by this project is:
-| Key                  | Value         |
-| -------------------- | ------------- |
-| MCU                  | STM32L476RG   |
-| MCU series           | STM32L4       |
-| MCU CPU core         | ARM Cortex-M4 |
-| MCU CPU profile      | M             |
-| MCU CPU architecture | ARMv7E-M      |
-| Toolchain            | gcc           |
-
 The components are selected based on:
-| File                  | Why                         | Source |
-| --------------------- | --------------------------- | ------ |
-| `cmsis_compiler.h`    | Must be included            | ARM    |
-| `cmsis_version.h`     | Must be included            | ARM    |
-| `core_cm4.h`          | MCU CPU core                | ARM    |
-| `armv7m_mpu.h`        | MCU CPU architecture        | ARM    |
-| `cmsis_gcc.h`         | Toolchain                   | ARM    |
-| `cmsis_gcc_m.h`       | Toolchain & MCU CPU profile | ARM    |
-| `stm32l4xx_gcc.ld`    | Toolchain & MCU series      | ST     |
-| `stm32l476xx.h`       | MCU                         | ST     |
-| `stm32l4xx.h`         | MCU series                  | ST     |
-| `startup_stm32l4xx.c` | MCU series                  | ST     |
-| `system_stm32l4xx.c`  | MCU series                  | ST     |
-| `STM32L476.svd`       | MCU                         | ST     |
+| File                  | Why                    | Source |
+| --------------------- | ---------------------- | ------ |
+| `cmsis_compiler.h`    | Must be included       | ARM    |
+| `cmsis_version.h`     | Must be included       | ARM    |
+| `core_cm4.h`          | MCU CPU core           | ARM    |
+| `armv7m_mpu.h`        | MCU CPU architecture   | ARM    |
+| `cmsis_gcc.h`         | Toolchain              | ARM    |
+| `cmsis_gcc_m.h`       | Toolchain & MCU core   | ARM    |
+| `stm32l4xx_gcc.ld`    | Toolchain & MCU series | ST     |
+| `stm32l476xx.h`       | MCU                    | ST     |
+| `stm32l4xx.h`         | MCU series             | ST     |
+| `startup_stm32l4xx.c` | MCU series             | ST     |
+| `system_stm32l4xx.c`  | MCU series             | ST     |
+| `STM32L476.svd`       | MCU                    | ST     |
 
 > [!NOTE]
 > When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
@@ -115,11 +114,11 @@ User
 └── main.c
 ```
 
-`demo_common` directory contains header and source code used by all demonstrations.
+- `demo_common` directory contains header and source code used by all demonstrations.
 
-`demo_x` directories contain header and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
+- `demo_x` directories contain header and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
 
-`main.c` invokes a specifc demonstration by calling the respective `demo_x_enter` function.
+- `main.c` invokes a specifc demonstration by calling the respective `demo_x_enter` function.
 
 # Setting Project Name
 In the project root directory, modify the <PROJECT_NAME> entry in `CMakeLists.txt`:
