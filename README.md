@@ -83,7 +83,8 @@ The components are selected based on:
 | `system_stm32l4xx.c`  | MCU series                  | ST     |
 | `STM32L476.svd`       | MCU                         | ST     |
 
-When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
+> [!NOTE]
+> When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
 
 ## User
 The `User` directory contains demonstration code.

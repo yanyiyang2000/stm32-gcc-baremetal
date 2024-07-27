@@ -13,7 +13,7 @@ extern volatile uint16_t demo_2_wave_data[40];
 
 
 /******************************************************************************/
-/*                             Utility Functions                              */
+/*                              Utility Function                              */
 
 void demo_2_util_populate_wave_data();
 /******************************************************************************/
