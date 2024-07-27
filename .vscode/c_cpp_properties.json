@@ -3,6 +3,7 @@
         {
             "name": "Linux",
             "forcedInclude": [
+                "${workspaceFolder}/CMSIS/Core/Include/cmsis_gcc.h",
                 "${workspaceFolder}/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h"
             ],
             "includePath": [

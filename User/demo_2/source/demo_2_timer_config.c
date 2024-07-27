@@ -22,7 +22,7 @@
  * 
  * Reference: RM0351, p.1180-1184
  */
-void TIM6_Config() {
+void TIM6_config() {
     // Enable TIM6 APB1 interface clock
     RCC->APB1ENR1 |= 1 << RCC_APB1ENR1_TIM6EN_Pos;
 

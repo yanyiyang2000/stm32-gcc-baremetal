@@ -33,7 +33,7 @@
  * 
  * Reference: RM0351, p.338; p.340-353
  */
-void DMA1_CH4_Config() {
+void DMA1_CH4_config() {
     // Enable DMA1 interface clock
     RCC->AHB1ENR |= 1 << RCC_AHB1ENR_DMA1EN_Pos;
 

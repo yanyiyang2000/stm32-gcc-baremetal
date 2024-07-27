@@ -21,7 +21,7 @@
  * 
  * Reference: RM0351, p.626; p.639-640
  */
-void DAC1_CH2_Config() {
+void DAC1_CH2_config() {
     // Enable DAC1 APB1 interface clock
     RCC->APB1ENR1 |= 1 << RCC_APB1ENR1_DAC1EN_Pos;
 

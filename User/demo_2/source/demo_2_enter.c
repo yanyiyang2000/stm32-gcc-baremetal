@@ -23,13 +23,13 @@ void demo_2_enter() {
     demo_2_util_populate_wave_data();
 
     // Configure DMA1 channel 4
-    DMA1_CH4_Config();
+    DMA1_CH4_config();
 
     // Configure TIM6
-    TIM6_Config();
+    TIM6_config();
 
     // Configure DAC1 channel 2
-    DAC1_CH2_Config();
+    DAC1_CH2_config();
 
     while (1) {}
 }
