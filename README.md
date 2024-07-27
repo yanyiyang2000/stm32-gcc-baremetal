@@ -114,14 +114,14 @@ User
 └── main.c
 ```
 
-- `demo_common` directory contains header and source code used by all demonstrations.
+- `demo_common` directory contains headers and source code used by all demonstrations.
 
-- `demo_x` directories contain header and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
+- `demo_x` directories contain headers and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
 
 - `main.c` invokes a specifc demonstration by calling the respective `demo_x_enter` function.
 
 # Setting Project Name
-In the project root directory, modify the <PROJECT_NAME> entry in `CMakeLists.txt`:
+In the project root directory, modify the `<PROJECT_NAME>` entry in `CMakeLists.txt`:
 ```cmake
 project(
     <PROJECT_NAME>
