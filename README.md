@@ -142,6 +142,8 @@ In the `build` directory, use the following command:
 ```bash
 openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "program User/firmware.elf verify reset exit"
 ```
+> [!NOTE]
+> When porting this project to other device, select appropriate interface and target to replace `interface/stlink.cfg` and `target/stm32l4x.cfg`.
 
 # Cleaning
 In the `build` directory, use the following command:
@@ -157,6 +159,8 @@ In any directory, use the following command:
 ```bash
 openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "gdb_port 3333"
 ```
+> [!NOTE]
+> When porting this project to other device, select appropriate interface and target to replace `interface/stlink.cfg` and `target/stm32l4x.cfg`.
 
 ## Session 2
 In the `build` directory, open another terminal, use the following command:
