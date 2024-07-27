@@ -6,7 +6,7 @@
 
 
 /**
- * This function configures GPIO PA2 as USART2 Transmitter (output):
+ * This function configures GPIO PA2 as USART2 transmitter (output):
  *   - Alternate function mode          (alternate function 7)
  *   - Output push-pull                 (default)
  *   - Output speed high
