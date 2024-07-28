@@ -16,7 +16,7 @@
 # Overview
 This project contains multiple demonstrations for board equpped with ARM Cortex MCU:
 
-|                      |                                          |
+| Property             | Value                                    |
 | -------------------- | ---------------------------------------- |
 | Development board    | STM32 Nucleo-64 w/ embedded ST-LINK/v2-1 |
 | MCU                  | STM32L476RG                              |
@@ -25,7 +25,9 @@ This project contains multiple demonstrations for board equpped with ARM Cortex 
 | MCU CPU architecture | ARMv7E-M                                 |
 | Toolchain            | gcc                                      |
 
-The project's source code is divided into two major directories. The `CMSIS` directory contains header files and source code provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [STMicroelectronics](https://github.com/STMicroelectronics/cmsis_device_l4) that are conforming to [CMSIS 6](https://arm-software.github.io/CMSIS_6/latest/General/index.html). The `User` directory contains header files and source code for the demonstractions and C runtime startup code (`crt0.S`).
+The project's source code is divided into two major directories: 
+- The `CMSIS` directory contains header files and source code provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [STMicroelectronics](https://github.com/STMicroelectronics/cmsis_device_l4) that are conforming to [CMSIS 6](https://arm-software.github.io/CMSIS_6/latest/General/index.html). 
+- The `User` directory contains header files and source code for the demonstractions and C runtime startup code (`crt0.S`).
 
 # Prerequisites
 Install the following packages:
@@ -40,7 +42,7 @@ Install the following packages:
 # Porting to other Cortex Devices
 Based on the properties of the device, replace the following files:
 
-| File                  | Properties             | Source |
+| File                  | Property               | Source |
 | --------------------- | ---------------------- | ------ |
 | `core_cm4.h`          | MCU CPU core           | ARM    |
 | `armv7m_mpu.h`        | MCU CPU architecture   | ARM    |
