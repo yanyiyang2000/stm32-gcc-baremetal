@@ -16,6 +16,7 @@
 # Overview
 This project contains multiple demonstrations for board equpped with ARM Cortex MCU:
 
+|                      |                                          |
 | -------------------- | ---------------------------------------- |
 | Development board    | STM32 Nucleo-64 w/ embedded ST-LINK/v2-1 |
 | MCU                  | STM32L476RG                              |
