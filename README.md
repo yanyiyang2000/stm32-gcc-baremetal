@@ -1,9 +1,7 @@
 # Table of Contents
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
-- [Project Structure](#project-structure)
-    - [CMSIS](#cmsis)
-    - [User](#user)
+- [Porting to other Cortex Devices](#porting-to-other-cortex-devices)
 - [Setting Project Name](#setting-project-name)
 - [Building](#building)
 - [Flashing](#flashing)
@@ -16,7 +14,7 @@
 - [References](#references)
 
 # Overview
-This project contains multiple demonstrations for the hardware with the following properties:
+This project contains multiple demonstrations for board equpped with ARM Cortex MCU:
 
 | Development board    | STM32 Nucleo-64 w/ embedded ST-LINK/v2-1 |
 | MCU                  | STM32L476RG                              |
@@ -37,7 +35,7 @@ Install the following packages:
 - `make`
 - `openocd`
 
-# Porting to Other Cortex Devices
+# Porting to other Cortex Devices
 Based on the properties of the device, replace the following files:
 
 | File                  | Properties             | Source |
