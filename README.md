@@ -42,24 +42,23 @@ Install the following packages:
 # Porting to other Cortex Devices
 Based on the properties of the target device, replace the following files:
 
-| File                  | Property               | Source |
-| --------------------- | ---------------------- | ------ |
-| `core_cm4.h`          | MCU CPU core           | ARM    |
-| `armv7m_mpu.h`        | MCU CPU architecture   | ARM    |
-| `cmsis_gcc.h`         | Toolchain              | ARM    |
-| `cmsis_gcc_m.h`       | Toolchain & MCU core   | ARM    |
-| `stm32l4xx_gcc.ld`    | Toolchain & MCU series | ST     |
-| `stm32l476xx.h`       | MCU                    | ST     |
-| `stm32l4xx.h`         | MCU series             | ST     |
-| `startup_stm32l4xx.c` | MCU series & Toolchain | ST     |
-| `system_stm32l4xx.c`  | MCU series             | ST     |
-| `STM32L476.svd`       | MCU                    | ST     |
+| File                   | Property               | Source |
+| ---------------------- | ---------------------- | ------ |
+| `core_cm4.h`           | MCU CPU core           | ARM    |
+| `armv7m_mpu.h`         | MCU CPU architecture   | ARM    |
+| `cmsis_gcc.h`          | Toolchain              | ARM    |
+| `cmsis_gcc_m.h`        | Toolchain & MCU core   | ARM    |
+| `stm32l4xx_gcc.ld`[^1] | Toolchain & MCU series | ST     |
+| `stm32l476xx.h`        | MCU                    | ST     |
+| `stm32l4xx.h`          | MCU series             | ST     |
+| `startup_stm32l4xx.c`  | MCU series & Toolchain | ST     |
+| `system_stm32l4xx.c`   | MCU series             | ST     |
+| `STM32L476.svd`        | MCU                    | ST     |
 
 > [!NOTE]
 > You need to modify the compile definitions, compile options and link options in each `CMakeLists.txt` based on the properties of the target device.
 
-> [!NOTE]
-> You may need to modify the linker script `xxx.ld` using correct FLASH and RAM size.
+[^1]: You may need to modify the linker script using correct FLASH and RAM size.
 
 # Setting Project Name
 In the project root directory, modify the `<PROJECT_NAME>` entry in `CMakeLists.txt`:
@@ -131,7 +130,7 @@ target remote localhost:3333
 # Tools
 Use the following command to shows all the predefined macros
 ```bash
-arm-none-eabi-gcc -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mthumb -E -dM -< /dev/null | sort
+arm-none-eabi-gcc -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -E -dM -< /dev/null | sort
 ```
 
 In the `build` directory, use the following command to view the dieassembly code:
