@@ -1,4 +1,5 @@
 # Table of Contents
+- [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
     - [CMSIS](#cmsis)
@@ -14,6 +15,18 @@
 - [Tools](#tools)
 - [References](#references)
 
+# Overview
+This project contains multiple demonstrations for the hardware with the following properties:
+
+| Development board    | STM32 Nucleo-64 w/ embedded ST-LINK/v2-1 |
+| MCU                  | STM32L476RG                              |
+| MCU series           | STM32L4                                  |
+| MCU CPU core         | ARM Cortex-M4                            |
+| MCU CPU architecture | ARMv7E-M                                 |
+| Toolchain            | gcc                                      |
+
+The project's source code is divided into two major directories. The `CMSIS` directory contains header files and source code provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [STMicroelectronics](https://github.com/STMicroelectronics/cmsis_device_l4) that are conforming to [CMSIS 6](https://arm-software.github.io/CMSIS_6/latest/General/index.html). The `User` directory contains header files and source code for the demonstractions and C runtime startup code (`crt0.S`).
+
 # Prerequisites
 Install the following packages:
 - `gcc-arm-none-eabi`
@@ -24,53 +37,11 @@ Install the following packages:
 - `make`
 - `openocd`
 
-# Project Structure
-The Development board, MCU and toolchain used by this project is:
-| Key                  | Value           |
-| -------------------- | --------------- |
-| Development board    | STM32 Nucleo-64 |
-| MCU                  | STM32L476RG     |
-| MCU series           | STM32L4         |
-| MCU CPU core         | ARM Cortex-M4   |
-| MCU CPU architecture | ARMv7E-M        |
-| Toolchain            | gcc             |
+# Porting to Other Cortex Devices
+Based on the properties of the device, replace the following files:
 
-## CMSIS
-The `CMSIS` directory contains components provided by [ARM](https://github.com/ARM-software/CMSIS_6/tree/main/CMSIS/Core) and [ST](https://github.com/STMicroelectronics/cmsis_device_l4).
-
-```bash
-CMSIS
-├── Core
-│   └── Include
-│       ├── cmsis_compiler.h
-|       ├── cmsis_gcc.h
-│       ├── cmsis_version.h
-│       ├── core_cm4.h
-│       └── m-profile
-│           ├── armv7m_mpu.h
-│           └── cmsis_gcc_m.h
-├── Device
-│   └── ST
-│       └── STM32L4xx
-│           ├── Config
-│           │   └── stm32l4xx_gcc.ld
-│           ├── Include
-│           │   ├── stm32l476xx.h
-│           │   ├── stm32l4xx.h
-│           │   └── system_stm32l4xx.h
-│           └── Source
-│               ├── gcc
-│               │   └── startup_stm32l4xx.c
-│               └── system_stm32l4xx.c
-└── SVD
-    └── STM32L476.svd
-```
-
-The components are selected based on:
-| File                  | Why                    | Source |
+| File                  | Properties             | Source |
 | --------------------- | ---------------------- | ------ |
-| `cmsis_compiler.h`    | Must be included       | ARM    |
-| `cmsis_version.h`     | Must be included       | ARM    |
 | `core_cm4.h`          | MCU CPU core           | ARM    |
 | `armv7m_mpu.h`        | MCU CPU architecture   | ARM    |
 | `cmsis_gcc.h`         | Toolchain              | ARM    |
@@ -78,47 +49,12 @@ The components are selected based on:
 | `stm32l4xx_gcc.ld`    | Toolchain & MCU series | ST     |
 | `stm32l476xx.h`       | MCU                    | ST     |
 | `stm32l4xx.h`         | MCU series             | ST     |
-| `startup_stm32l4xx.c` | MCU series             | ST     |
+| `startup_stm32l4xx.c` | MCU series & Toolchain | ST     |
 | `system_stm32l4xx.c`  | MCU series             | ST     |
 | `STM32L476.svd`       | MCU                    | ST     |
 
 > [!NOTE]
-> When porting this project to other device, select appropriate files based on the criteria above. Modify the linker script `xxx.ld` using the corresponding FLASH and RAM size.
-
-## User
-The `User` directory contains demonstration code.
-
-```bash
-User
-├── CMakeLists.txt
-├── demo_common
-│   ├── CMakeLists.txt
-│   ├── include
-│   │   └── demo_common_config.h
-│   └── source
-│       ├── demo_common_xxx.c
-│       ├── cortex_m4_crt0.S
-│       └── syscalls.c
-├── demo_1
-│   ├── CMakeLists.txt
-│   ├── include
-│   │   └── demo_1_config.h
-│   └── source
-│       └── demo_1_xxx.c
-├── demo_2
-│   ├── CMakeLists.txt
-│   ├── include
-│   │   └── demo_2_config.h
-│   └── source
-│       └── demo_2_xxx.c
-└── main.c
-```
-
-- `demo_common` directory contains headers and source code used by all demonstrations.
-
-- `demo_x` directories contain headers and source code used by individual demonstrations. Each demonstration contains `demo_x_enter.c` which provides the `demo_x_enter` function to initialize the device and run in an infinite loop.
-
-- `main.c` invokes a specifc demonstration by calling the respective `demo_x_enter` function.
+> You may need to modify the linker script `xxx.ld` using correct FLASH and RAM size.
 
 # Setting Project Name
 In the project root directory, modify the `<PROJECT_NAME>` entry in `CMakeLists.txt`:
@@ -215,6 +151,7 @@ arm-none-eabi-size User/firmware.elf
 
 # References
 - [ARMv7-M Architecture Reference Manual (DDI 0403)](https://developer.arm.com/documentation/ddi0403/latest/)
+- [Cortex-M4 Devices Generic User Guide (DUI 0553)](https://developer.arm.com/documentation/dui0553/latest/)
 - [STM32L47xxx Reference Manual (RM0351)](https://www.st.com/resource/en/reference_manual/rm0351-stm32l47xxx-stm32l48xxx-stm32l49xxx-and-stm32l4axxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
 - [STM32L476xx Datasheet (DS10198)](https://www.st.com/resource/en/datasheet/stm32l476je.pdf)
 - [STM32 Nucleo-64 Boards User Manual (UM1724)](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)

@@ -14,6 +14,10 @@ add_subdirectory(
     ${CMAKE_CURRENT_LIST_DIR}/demo_3
 )
 
+add_subdirectory(
+    ${CMAKE_CURRENT_LIST_DIR}/demo_4
+)
+
 # add more demo directory here
 
 add_executable(
@@ -34,6 +38,7 @@ target_include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/demo_1/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_2/include
     ${CMAKE_CURRENT_LIST_DIR}/demo_3/include
+    ${CMAKE_CURRENT_LIST_DIR}/demo_4/include
     # add more demo includes here
 )
 
@@ -65,6 +70,7 @@ target_link_directories(
     ${CMAKE_CURRENT_LIST_DIR}/demo_1
     ${CMAKE_CURRENT_LIST_DIR}/demo_2
     ${CMAKE_CURRENT_LIST_DIR}/demo_3
+    ${CMAKE_CURRENT_LIST_DIR}/demo_4
     # add more demo libraries here
 )
 
@@ -72,7 +78,7 @@ target_link_libraries(
     firmware
     PUBLIC
     demo_common
-    demo_3  # change this entry to the directory of the demo being used
+    demo_4  # change this entry to the directory of the demo being used
 )
 
 target_link_options(
@@ -88,5 +94,6 @@ target_link_options(
     -Wl,--gc-sections           # enable garbage collection of unused sections
     -Wl,--trace                 # prints name of input files (use --verbose for more detailed information)
     -Wl,--print-memory-usage
+    # -Wl,--print-map           # uncomment to print a link map
     -T "${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
