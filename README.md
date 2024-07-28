@@ -40,7 +40,7 @@ Install the following packages:
 - `openocd`
 
 # Porting to other Cortex Devices
-Based on the properties of the device, replace the following files:
+Based on the properties of the target device, replace the following files:
 
 | File                  | Property               | Source |
 | --------------------- | ---------------------- | ------ |
@@ -54,6 +54,9 @@ Based on the properties of the device, replace the following files:
 | `startup_stm32l4xx.c` | MCU series & Toolchain | ST     |
 | `system_stm32l4xx.c`  | MCU series             | ST     |
 | `STM32L476.svd`       | MCU                    | ST     |
+
+> [!NOTE]
+> You need to modify the compile definitions, compile options and link options in each `CMakeLists.txt` based on the properties of the target device.
 
 > [!NOTE]
 > You may need to modify the linker script `xxx.ld` using correct FLASH and RAM size.
