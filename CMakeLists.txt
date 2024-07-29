@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 project(
-    test
+    stm32l476-demo
     LANGUAGES C ASM
 )
 
@@ -49,7 +49,7 @@ add_link_options(
     -Wl,--gc-sections           # enable garbage collection of unused sections
     -Wl,--trace                 # prints name of input files (use --verbose for more detailed information)
     -Wl,--print-memory-usage
-    -Wl,--print-map
+    # -Wl,--print-map
     -T "${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
 
