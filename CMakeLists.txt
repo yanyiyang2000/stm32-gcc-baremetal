@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
 
+project(
+    test
+    LANGUAGES C ASM
+)
+
 # Uncomment to make cmake output verbose
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -14,12 +19,38 @@ set(CMAKE_C_COMPILER   "/usr/bin/arm-none-eabi-gcc")
 set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
 set(CMAKE_EXECUTABLE_SUFFIX_C   .elf)
 
-# Set C standard
-# set(CMAKE_CXX_STANDARD 20)
+#set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_C_FLAGS_DEBUG "-Og -g")
+set(CMAKE_C_FLAGS_RELEASE "-O3")
 
-project(
-    test
-    LANGUAGES C ASM
+add_compile_definitions(
+    STM32L476xx
+)
+
+add_compile_options(
+    -mthumb
+    -mcpu=cortex-m4
+    -mfloat-abi=hard
+    -mfpu=fpv4-sp-d16
+    -Wall                       # enable all warnings
+    -Wno-missing-attributes     # disable warning about missing attributes
+    -ffunction-sections         # place each function in its own named section in the output object file
+    -fdata-sections             # place each data in its own named section in the output object file
+)
+
+add_link_options(
+    -mthumb
+    -mcpu=cortex-m4
+    -mfloat-abi=hard
+    -mfpu=fpv4-sp-d16
+    -nostartfiles               # use custom crt0.S (otherwise newlib's crt0.S will be used)
+    --specs=nano.specs          # use libc_nano.a (otherwise libc.a will be used)
+    --specs=nosys.specs         # use libnosys.a (provides stub syscalls such as `_exit` used by the custom crt0.S)
+    -Wl,--gc-sections           # enable garbage collection of unused sections
+    -Wl,--trace                 # prints name of input files (use --verbose for more detailed information)
+    -Wl,--print-memory-usage
+    -Wl,--print-map
+    -T "${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
 )
 
 add_subdirectory(

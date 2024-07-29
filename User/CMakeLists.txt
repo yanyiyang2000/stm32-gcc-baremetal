@@ -42,27 +42,6 @@ target_include_directories(
     # add more demo includes here
 )
 
-target_compile_definitions(
-    firmware
-    PUBLIC
-    STM32L476xx
-)
-
-target_compile_options(
-    firmware
-    PUBLIC
-    -mthumb
-    -mcpu=cortex-m4
-    -mfloat-abi=hard
-    -mfpu=fpv4-sp-d16
-    -O0                         # no optimization
-    -g3                         # maximum debugging information
-    -Wall                       # enable all warnings
-    -Wno-missing-attributes     # disable warning about missing attributes
-    -ffunction-sections         # place each function in its own named section in the output object file
-    -fdata-sections             # place each data in its own named section in the output object file
-)
-
 target_link_directories(
     firmware
     PUBLIC
@@ -78,22 +57,5 @@ target_link_libraries(
     firmware
     PUBLIC
     demo_common
-    demo_4  # change this entry to the directory of the demo being used
-)
-
-target_link_options(
-    firmware
-    PUBLIC
-    -mthumb
-    -mcpu=cortex-m4
-    -mfloat-abi=hard
-    -mfpu=fpv4-sp-d16
-    -nostartfiles               # use custom crt0.S (otherwise newlib's crt0.S will be used)
-    --specs=nano.specs          # use libc_nano.a (otherwise libc.a will be used)
-    --specs=nosys.specs         # use libnosys.a (provides stub syscalls such as `_exit` used by the custom crt0.S)
-    -Wl,--gc-sections           # enable garbage collection of unused sections
-    -Wl,--trace                 # prints name of input files (use --verbose for more detailed information)
-    -Wl,--print-memory-usage
-    # -Wl,--print-map           # uncomment to print a link map
-    -T "${PROJECT_SOURCE_DIR}/CMSIS/Device/ST/STM32L4xx/Config/stm32l4xx_gcc.ld"
+    demo_2  # change this entry to the directory of the demo being used
 )

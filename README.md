@@ -70,9 +70,18 @@ project(
 ```
 
 # Building
-In the project root directory, use the following commands one by one:
+In the project root directory, use one of the following commands:
+- For debug purpose: 
+```cmake
+cmake -D CMAKE_BUILD_TYPE=Debug -B build .
+```
+- For release purpose: 
+```cmake
+cmake -D CMAKE_BUILD_TYPE=Release -B build .
+```
+
+In the project root directory, use the following command:
 ```bash
-cmake -B build .
 cmake --build ./build
 ```
 
