@@ -72,11 +72,11 @@ project(
 # Building
 In the project root directory, use one of the following commands:
 - For debug purpose: 
-```cmake
+```bash
 cmake -D CMAKE_BUILD_TYPE=Debug -B build .
 ```
 - For release purpose: 
-```cmake
+```bash
 cmake -D CMAKE_BUILD_TYPE=Release -B build .
 ```
 
