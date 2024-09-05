@@ -9,6 +9,7 @@ This is a demonstration of a simple task scheduler running on the ARMv7-M archit
 - `R14` (a.k.a. `LR`)
 - `R15` (a.k.a. `PC`)
 - `xPSR`
+- `CONTROL  `
 
 ## Phase 1: Power On
 A **Reset exception** is triggered when the processor is powered on. 
@@ -17,7 +18,7 @@ Upon the entry of the exception, the processor (hardware) will do the following:
 1. Set mode to **Thread Mode**.
 2. Set `MSP` to the first value in the **Vector Table** and align it *downward* to the nearest 8-byte boudary.
 3. Set `PSP` to an unknown value and align it *downward* to the nearest 8-byte boudary.
-4. Use `MSP` as `SP` (i.e., the `SPSEL` bit of the `CONTROL` register is 0 by default).
+4. Use `MSP` as `SP` (i.e., the `SPSEL` bit of `CONTROL` is 0 by default).
 5. ... (See *Armv7-M Architecture Reference Manual B1.5.5 Reset behavior*)
 6. Branch to **Reset Handler**.
 
