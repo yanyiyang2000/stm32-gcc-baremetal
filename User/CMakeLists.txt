@@ -57,5 +57,5 @@ target_link_libraries(
     firmware
     PUBLIC
     demo_common
-    demo_2  # change this entry to the directory of the demo being used
+    demo_4  # change this entry to the directory of the demo being used
 )

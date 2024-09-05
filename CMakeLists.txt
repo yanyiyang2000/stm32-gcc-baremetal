@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(
-    stm32l476-demo
-    LANGUAGES C ASM
-)
-
 # Uncomment to make cmake output verbose
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -19,8 +14,13 @@ set(CMAKE_C_COMPILER   "/usr/bin/arm-none-eabi-gcc")
 set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
 set(CMAKE_EXECUTABLE_SUFFIX_C   .elf)
 
-#set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_C_FLAGS_DEBUG "-Og -g")
+project(
+    stm32l476-demo
+    LANGUAGES C ASM
+)
+
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+# set(CMAKE_C_FLAGS_DEBUG "-Og -g")
 set(CMAKE_C_FLAGS_RELEASE "-O3")
 
 add_compile_definitions(
@@ -30,7 +30,7 @@ add_compile_definitions(
 add_compile_options(
     -mthumb
     -mcpu=cortex-m4
-    -mfloat-abi=hard
+    # -mfloat-abi=hard
     -mfpu=fpv4-sp-d16
     -Wall                       # enable all warnings
     -Wno-missing-attributes     # disable warning about missing attributes
@@ -41,7 +41,7 @@ add_compile_options(
 add_link_options(
     -mthumb
     -mcpu=cortex-m4
-    -mfloat-abi=hard
+    # -mfloat-abi=hard
     -mfpu=fpv4-sp-d16
     -nostartfiles               # use custom crt0.S (otherwise newlib's crt0.S will be used)
     --specs=nano.specs          # use libc_nano.a (otherwise libc.a will be used)
