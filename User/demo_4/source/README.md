@@ -9,7 +9,7 @@ This is a demonstration of a simple task scheduler running on the ARMv7-M archit
 - `R14` (a.k.a. `LR`)
 - `R15` (a.k.a. `PC`)
 - `xPSR`
-- `CONTROL  `
+- `CONTROL`
 
 ## Phase 1: Power On
 A **Reset exception** is triggered when the processor is powered on. 
