@@ -11,7 +11,7 @@ This is a demonstration of a simple task scheduler running on the ARMv7-M archit
 - `xPSR`
 - `CONTROL`
 
-## Phase 1: Power On
+## Phase 1: Power On and Reset
 A **Reset exception** is triggered when the processor is powered on. 
 
 Upon the entry of the exception, the processor (hardware) will do the following:
@@ -31,23 +31,25 @@ Now the processor is in **Thread Mode** and `MSP` is used.
 
 
 ## Phase 2: Start the First Task
-An **SVC exception** is triggered by `svc 0` instruction.
+An **SVC exception** is triggered by the `svc 0` instruction in `demo_4_enter.c`.
 
 Upon the entry of the exception, the processor (hardware) will do the following:
 1. Push `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` to the stack pointed to by `MSP`.
-2. ... (See *Armv7-M Architecture Reference Manual B1.5.6 Exception entry behavior*)
-3. Use `MSP` as `SP`
+2. Enter **Handler Mode** and use `MSP` as `SP`
+3. ... (See *Armv7-M Architecture Reference Manual B1.5.6 Exception entry behavior*)
 4. Branch to **SVC Handler**.
 
 The **SVC Handler** (software, defined in `demo_4_isr.c`) will then do the following:
 1. Select a task.
-1. Set `PSP` to the top of the stack of the task.
-2. Set `R4` - `R11` according to the **Task Control Block (TCB)** of the task.
-3. Set `LR` to `0xFFFFFFFD` to instruct the processor to enter **Thread Mode** and use `PSP` as `SP` upon exception return.
-4. Enable **SysTick interrupt** to perform task switch later on.
+2. Set `PSP` to the top of the stack of the task.
+3. Set `R4` - `R11` according to the **Task Control Block (TCB)** of the task.
+4. Set `LR` to `0xFFFFFFFD`[^1] to instruct the processor to enter **Thread Mode** and use PSP` as `SP` upon exception return[^2].
+5. Enable **SysTick interrupt** to perform task switch later on.
+[^1]: See *Armv7-M Architecture Reference Manual Table B1-8* for the effects of different `LR` values.
+[^2]: Setting `LR` to `0xFFFFFFFD` will cause the hardware to set the `SPSEL` bit of `CONTROL` to 1. (*Armv7-M Architecture Reference Manual B1.5.8 Exception return behavior*)
 
 Upon the return of the exception, the processor (hardware) will do the following:
-- Use `PSP` as `SP`
+- Enter **Thread Mode** and use `PSP` as `SP`
 - Pop the values of `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` from the stack pointed to by `PSP`.
 - ... (See *Armv7-M Architecture Reference Manual B1.5.8 Exception return behavior*)
 
@@ -61,8 +63,8 @@ An **SysTick interrupt** is triggered when a certain amount of time has elapsed.
 
 Upon the entry of the interrupt, the processor (hardware) will do the following:
 1. Push `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` to the stack pointed to by `PSP`.
-2. ... (See *Armv7-M Architecture Reference Manual B1.5.6 Exception entry behavior*)
-3. Use `MSP` as `SP`
+2. Enter **Handler Mode** and use `MSP` as `SP`.
+3. ... (See *Armv7-M Architecture Reference Manual B1.5.6 Exception entry behavior*)
 4. Branch to **SysTick Handler**.
 
 The **SysTick Handler** (software, defined in `demo_4_isr.c`) will then do the following:
@@ -73,7 +75,7 @@ The **SysTick Handler** (software, defined in `demo_4_isr.c`) will then do the f
 5. Set `PSP` to the value specified by the selected task's TCB.
 
 Upon the return of the interrupt, the processor (hardware) will do the following:
-- Use `PSP` as `SP`.
+- Enter **Thread Mode** and use `PSP` as `SP`.
 - Pop the values of `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` from the stack pointed to by `PSP`.
 - ... (See *Armv7-M Architecture Reference Manual B1.5.8 Exception return behavior*)
 

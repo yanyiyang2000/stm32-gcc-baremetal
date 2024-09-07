@@ -10,22 +10,22 @@
 
 
 uint32_t demo_4_task_1_stack[] = {
-    0x0,
-    0x0,
-    0x0,
-    0x0,
-    0x0,
-    0x0,
-    0x0,
-    0x0,
-    0x10101010,                         // R0
-    0x11111111,                         // R1
-    0x12121212,                         // R2
-    0x13131313,                         // R3
-    0x1C1C1C1C,                         // R12
-    0xFFFFFFFD,                         // LR (R14), Use PSP after returning from exception [DDI 0403E, B1.5.8]
-    (uint32_t)&(demo_4_task_1_enter),   // PC (R15)
-    0x01000000                          // xSPR, ESPR's bit 0 (T bit) should be set to indicate Thumb mode
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x0,                                // for task stack
+    0x10101010,                         // intial value for `R0`
+    0x11111111,                         // intial value for `R1`
+    0x12121212,                         // intial value for `R2`
+    0x13131313,                         // intial value for `R3`
+    0x1C1C1C1C,                         // intial value for `R12`
+    0xFFFFFFFD,                         // intial value for `LR`
+    (uint32_t)&(demo_4_task_1_enter),   // intial value for `PC`
+    0x01000000                          // intial value for `xPSR`
 };
 
 uint32_t demo_4_task_2_stack[] = {

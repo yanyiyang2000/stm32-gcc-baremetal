@@ -1,22 +1,45 @@
+/* Device API */
+#include "stm32l476xx.h"
+
 /* CMSIS API */
 #include "cmsis_gcc.h"
+#include "core_cm4.h"
 
 /* Application API */
 #include "demo_4_config.h"
 
 /**
- *  @note The reason this function has attribute "naked" is because the 
- *        operating system must perform the context switch before saving any
- *        caller-saved registers onto the stack.
+ * TODO: Use linked list to store tasks.
+ */
+
+/**
+ * Upon the entry of SysTick interrupt, the processor (hardware) will do the following:
+ * 
+ * 1. Push `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` to the stack pointed 
+ *    to by `PSP` because it is used as `SP` prior to the interrupt.
+ * 
+ * 2. Enter Handler Mode and use `MSP` as `SP`.
+ * 
+ * Upon the return of SysTick interrupt, the processor (hardware) will do the following:
+ * 
+ * 1. Enter Thread Mode and use `PSP` as `SP`.
+ * 
+ * 2. Pop the values of `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` from the stack pointed to by `PSP`.
+ * 
+ * @note Some registers (i.e., `R0` and `R1`) are used to perform context switch
+ *       so no usage of the said registers should precede the context switch 
+ *       code. Hence, attribute `naked` is used to prevent the compiler from
+ *       adding prologue and epilogue before and after the function. Prologue
+ *       and epilogue are instead added manually after the context switch code.
  */
 void __attribute__ ((naked)) SysTick_Handler() {
-    // Save Task 1's PSP
+    // Save current task's PSP
     __ASM volatile ("mrs   r0, psp");               // r0 <- psp
-    __ASM volatile ("ldr   r1, =demo_4_task_1");    // r1 <- addr(demo_4_task_1)
-    __ASM volatile ("str   r1, [r0], #4");          // mem[r0, 4] <- r1
-                                                    // r0 <- r0 + 4
+    __ASM volatile ("ldr   r1, =demo_4_task_1");    // r1 <- addr(demo_4_task_1.stack_top)
+    __ASM volatile ("str   r0, [r1], #4");          // mem[r1, 4] <- r0
+                                                    // r1 <- r1 + 4
 
-    // Save Task 1's R4 - R11
+    // Save current task's R4 - R11
     __ASM volatile ("stmia r1, {r4-r11}");          // mem[r1, 4] <- r4
                                                     // r1 <- r1 + 4
                                                     // mem[r1, 4] <- r5
@@ -25,12 +48,12 @@ void __attribute__ ((naked)) SysTick_Handler() {
                                                     // mem[r1, 4] <- r11
                                                     // r1 <- r1 + 4
 
-    // Restore Task 2's PSP
-    __ASM volatile ("ldr   r1, =demo_4_task_2");    // r1 <- addr(demo_4_task_2)
+    // Restore next task's PSP
+    __ASM volatile ("ldr   r1, =demo_4_task_2");    // r1 <- addr(demo_4_task_2.stack_top)
     __ASM volatile ("ldr   r0, [r1]");              // r0 <- mem[r1, 4]
     __ASM volatile ("msr   psp, r0");               // psp <- r0
 
-    // Prologue (MSP is used)
+    // Prologue
     // __ASM volatile ("push  {r7, lr}");
     // __ASM volatile ("add   r7, sp, #0");
 
@@ -43,32 +66,38 @@ void __attribute__ ((naked)) SysTick_Handler() {
     __ASM volatile ("bx    lr");
 }
 
+/**
+ * Upon the entry of SVC exception, the processor (hardware) will do the following:
+ * 
+ * 1. Push `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` to the stack pointed 
+ *    to by `MSP` because it is used as `SP` prior to the exception.
+ * 
+ * 2. Enter Handler Mode and use `MSP` as `SP`.
+ * 
+ * Upon the return of SVC exception, the processor (hardware) will do the following:
+ * 
+ * 1. Enter Thread Mode and use `PSP` as `SP`. (Effect of setting `LR` to `0xFFFFFFFD`)
+ * 
+ * 2. Set the `SPSEL` bit of `CONTROL` to 1. (Effect of setting `LR` to `0xFFFFFFFD`)
+ * 
+ * 3. Pop the values of `R0` - `R3`, `R12`, `SP`, `LR`, `PC` and `xPSR` from the stack pointed to by `PSP`.
+ * 
+ * @note Some registers (i.e., `R0` and `R1`) are used to perform context switch
+ *       so no usage of the said registers should precede the context switch 
+ *       code. Hence, attribute `naked` is used to prevent the compiler from
+ *       adding prologue and epilogue before and after the function. Prologue
+ *       and epilogue are instead added manually after the context switch code.
+ */
 void __attribute__ ((naked)) SVC_Handler() {
     extern struct demo_4_task demo_4_task_1;
 
-    // Set Task's PSP (TODO: pick the first task (instead of task 1) from the task list)
+    // Set task's PSP (TODO: pick the first task (instead of task 1) from the task list)
     __set_PSP(demo_4_task_1.stack_top);
 
     // TODO: Restore r4-r11 manually
 
-    // TODO: Enable SysTick to perform task switch
+    // TODO: Enable SysTick interrupt to delegate task switch to SysTick Handler
 
     __ASM volatile ("ldr    lr, =0xFFFFFFFD");
     __ASM volatile ("bx     lr");
-
-    /**
-     * Upon the return of the SVC exception, the following will take place:
-     * 
-     * fp   <- psp
-     * r0   <- mem[fp,      4]
-     * r1   <- mem[fp + 4,  4]
-     * r2   <- mem[fp + 8,  4]
-     * r3   <- mem[fp + 12, 4]
-     * r12  <- mem[fp + 16, 4]
-     * lr   <- mem[fp + 20, 4]
-     * pc   <- mem[fp + 24, 4] (instruction at pc will be executed next)
-     * xpsr <- mem[fp + 28, 4]
-     * 
-     * See Armv7-M Architecture Reference Manual B1.5.8 (page B1-542)
-     */
 }
