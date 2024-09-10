@@ -1,10 +1,10 @@
 /* Standard library API */
 #include <stdint.h>
 
-/* Device API */
+/* CMSIS Device API */
 #include "stm32l476xx.h"
 
-/* Application API */
+/* User API */
 #include "demo_common_config.h"
 #include "demo_1_config.h"
 

@@ -1,7 +1,7 @@
 /* Standard library API */
 #include <stdint.h>
 
-/* Application API */
+/* User API */
 #include "demo_2_config.h"
 
 
